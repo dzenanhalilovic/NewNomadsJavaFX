@@ -1,0 +1,2 @@
+Uci u Dbtest.java kliknuti run, zatim dolje u otuputu pritisnuti tri tacke pored likone kamere, u stavku enivroment varijable ne unositit nista u input blok nego kliknuti ikonu pored ikone foldera, zatim pritisnuti ikonu plusa kako bi se dodala varijabla, zatim pod Name unjeti DB_PASSWORD, a pod sifru Value unjeti lozinku koju cu poslati na grupu, zatim kliknuti opet ikonu plusa, zatim ok, zatim apply pa opet ok.
+Otovoriti DBTest file i kliknuti run, u nakon 30 sekundi bi se trebala pojaviti informacija o konekciji.
