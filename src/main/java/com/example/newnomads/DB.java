@@ -1,18 +1,14 @@
 package com.example.newnomads;
 
-import io.github.cdimascio.dotenv.Dotenv;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DB {
 
-    private static final Dotenv dotenv = Dotenv.load(); // učitava .env
-
-    private static final String URL = dotenv.get("DB_URL");
-    private static final String USER = dotenv.get("DB_USER");
-    private static final String PASS = dotenv.get("DB_PASS");
+    private static final String URL = Env.get("DB_URL");
+    private static final String USER = Env.get("DB_USER");
+    private static final String PASS = Env.get("DB_PASS");
 
     public static Connection getConnection() throws SQLException, ClassNotFoundException {
         Class.forName("com.mysql.cj.jdbc.Driver");

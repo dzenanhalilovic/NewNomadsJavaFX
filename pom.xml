@@ -94,11 +94,6 @@
             <version>8.1.0</version>
         </dependency>
 
-        <dependency>
-            <groupId>io.github.cdimascio</groupId>
-            <artifactId>java-dotenv</artifactId>
-            <version>5.2.2</version>
-        </dependency>
 
     </dependencies>
 
@@ -132,6 +127,11 @@
                             <jlinkImageName>app</jlinkImageName>
                             <noManPages>true</noManPages>
                             <stripDebug>true</stripDebug>
+
+                            <options>
+                                <option>--add-reads</option>
+                                <option>com.example.newnomads=ALL-UNNAMED</option>
+                            </options>
                             <noHeaderFiles>true</noHeaderFiles>
                         </configuration>
                     </execution>

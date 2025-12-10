@@ -10,6 +10,7 @@ module com.example.newnomads {
     requires java.sql;
 
 
+
     opens com.example.newnomads to javafx.fxml;
     exports com.example.newnomads;
 }
