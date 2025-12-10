@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="20" alignment="CENTER"
+      xmlns="http://javafx.com/javafx/17"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.newnomads.RegruterController">
+
+    <Label text="Dobrodošli, Regruter!" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+
+    <Button fx:id="logout" text="Logout" onAction="#logout"/>
+
+</VBox>

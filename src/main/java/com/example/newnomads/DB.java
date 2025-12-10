@@ -1,16 +1,20 @@
 package com.example.newnomads;
 
+import io.github.cdimascio.dotenv.Dotenv;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DB {
-    private static final String URL = "jdbc:mysql://localhost:3306/newnomads?serverTimezone=UTC&useSSL=false";
-    private static final String USER = "root";
-    private static final String PASS = "root!";
+
+    private static final Dotenv dotenv = Dotenv.load(); // učitava .env
+
+    private static final String URL = dotenv.get("DB_URL");
+    private static final String USER = dotenv.get("DB_USER");
+    private static final String PASS = dotenv.get("DB_PASS");
 
     public static Connection getConnection() throws SQLException, ClassNotFoundException {
-        // Registracija MySQL drivera
         Class.forName("com.mysql.cj.jdbc.Driver");
         return DriverManager.getConnection(URL, USER, PASS);
     }

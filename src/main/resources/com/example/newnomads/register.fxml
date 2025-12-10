@@ -1,17 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
 
-<VBox spacing="10" alignment="CENTER"
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox spacing="12" alignment="CENTER"
       xmlns="http://javafx.com/javafx/17"
       xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.example.newnomads.RegisterController">
+      fx:controller="com.example.newnomads.RegisterController"
+      style="-fx-padding: 30;">
 
-    <Label text="Register"/>
-    <TextField fx:id="imeField" promptText="Ime"/>
-    <TextField fx:id="emailField" promptText="Email"/>
-    <PasswordField fx:id="passwordField" promptText="Password"/>
-    <Button text="Register" onAction="#register"/>
-    <Button text="Login" onAction="#goToLogin"/>
-    <Label fx:id="message"/>
+    <Label text="Registracija" style="-fx-font-size: 22px;"/>
+
+    <TextField fx:id="imeField" promptText="Ime ili ime firme" prefWidth="250"/>
+    <TextField fx:id="emailField" promptText="Email" prefWidth="250"/>
+    <ComboBox fx:id="roleBox" prefWidth="250" promptText="Odaberi ulogu"/>
+    <PasswordField fx:id="passwordField" promptText="Password" prefWidth="250"/>
+
+    <!-- Polja samo za firmu -->
+    <TextField fx:id="brojTelefonaField" promptText="Broj telefona" prefWidth="250" visible="false"/>
+    <TextField fx:id="vlasnikFirmeField" promptText="Vlasnik firme (opcionalno)" prefWidth="250" visible="false"/>
+    <TextArea fx:id="oFirmiField" promptText="O firmi (opcionalno)" prefWidth="250" visible="false" prefHeight="60"/>
+
+    <Button text="Registruj se" onAction="#register" style="-fx-padding: 8 20; -fx-font-size: 14px;"/>
+    <Button text="Idi na login" onAction="#goToLogin" style="-fx-padding: 8 20;"/>
+
+    <Label fx:id="message" style="-fx-text-fill: red; -fx-font-size: 14px;"/>
 </VBox>
