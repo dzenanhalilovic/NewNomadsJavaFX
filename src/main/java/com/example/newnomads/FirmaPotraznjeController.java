@@ -60,5 +60,15 @@ public class FirmaPotraznjeController {
             e.printStackTrace();
         }
     }
-
+    @FXML
+    private void goBack() {
+        try {
+            Stage stage = (Stage) btnDodajPotraznju.getScene().getWindow();
+            stage.setScene(new Scene(
+                    FXMLLoader.load(getClass().getResource("/com/example/newnomads/firma.fxml"))
+            ));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

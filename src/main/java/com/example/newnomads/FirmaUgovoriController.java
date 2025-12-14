@@ -46,10 +46,30 @@ public class FirmaUgovoriController {
     }
 
     @FXML
+    private void prihvatiUgovor() {
+        Ugovor selektovan = ugovoriTable.getSelectionModel().getSelectedItem();
+        if (selektovan != null) {
+            selektovan.setStatusUgovora("aktivan");
+            UgovorDAO.updateStatusUgovora(selektovan.getIdUgovora(), "aktivan");
+            loadUgovori(); // osvježi tabelu
+        }
+    }
+
+    @FXML
+    private void odbijUgovor() {
+        Ugovor selektovan = ugovoriTable.getSelectionModel().getSelectedItem();
+        if (selektovan != null) {
+            selektovan.setStatusUgovora("odbijen");
+            UgovorDAO.updateStatusUgovora(selektovan.getIdUgovora(), "odbijen");
+            loadUgovori(); // osvježi tabelu
+        }
+    }
+
+    @FXML
     private void goBack() {
         try {
             Stage stage = (Stage) ugovoriTable.getScene().getWindow();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/newnomads/firmaDashboard.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/newnomads/firma.fxml"));
             stage.setScene(new Scene(loader.load()));
         } catch (Exception e) {
             e.printStackTrace();

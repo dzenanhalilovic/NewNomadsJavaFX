@@ -48,7 +48,7 @@ public class FirmaRadniciController {
         try {
             Stage stage = (Stage) tableRadnici.getScene().getWindow();
             stage.setScene(new Scene(
-                    FXMLLoader.load(getClass().getResource("/com/example/newnomads/firmaDashboard.fxml"))
+                    FXMLLoader.load(getClass().getResource("/com/example/newnomads/firma.fxml"))
             ));
         } catch (Exception e) {
             e.printStackTrace();

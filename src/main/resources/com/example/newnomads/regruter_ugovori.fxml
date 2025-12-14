@@ -8,7 +8,7 @@
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.example.newnomads.RegruterUgovoriController">
 
-    <!-- Center: tabela + dugme -->
+    <!-- Center: tabela + dugmad -->
     <center>
         <VBox spacing="10" alignment="CENTER">
             <padding>
@@ -25,9 +25,11 @@
                 </columns>
             </TableView>
 
-            <Button text="⬅ Nazad" onAction="#goBack"/>
+            <HBox spacing="10">
+                <Button text="⬅ Nazad" onAction="#goBack"/>
+                <Button text="Dodaj ugovor" onAction="#dodajUgovor"/>
+            </HBox>
         </VBox>
-
     </center>
 
 </BorderPane>

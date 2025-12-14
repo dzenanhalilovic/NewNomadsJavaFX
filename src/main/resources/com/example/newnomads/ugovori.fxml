@@ -1,23 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
 
-<VBox spacing="10" alignment="CENTER" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.example.newnomads.FirmaUgovoriController">
+<BorderPane xmlns="http://javafx.com/javafx/21.0.6"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.newnomads.FirmaUgovoriController">
 
-    <Label text="Ugovori firme" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+    <center>
+        <VBox spacing="10" alignment="CENTER">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
 
-    <TableView fx:id="ugovoriTable" prefWidth="800" prefHeight="400">
-        <columns>
-            <TableColumn text="ID" prefWidth="50" fx:id="colId"/>
-            <TableColumn text="Radnik" prefWidth="150" fx:id="colRadnik"/>
-            <TableColumn text="Datum kreiranja" prefWidth="150" fx:id="colDatumKreiranja"/>
-            <TableColumn text="Datum početka" prefWidth="100" fx:id="colDatumPocetka"/>
-            <TableColumn text="Datum kraja" prefWidth="100" fx:id="colDatumKraja"/>
-            <TableColumn text="Status" prefWidth="100" fx:id="colStatus"/>
-            <TableColumn text="Opis" prefWidth="150" fx:id="colOpis"/>
-        </columns>
-    </TableView>
+            <TableView fx:id="ugovoriTable" prefWidth="700" prefHeight="400">
+                <columns>
+                    <TableColumn fx:id="colId" text="ID" prefWidth="50"/>
+                    <TableColumn fx:id="colRadnik" text="Radnik" prefWidth="120"/>
+                    <TableColumn fx:id="colDatumKreiranja" text="Kreirano" prefWidth="120"/>
+                    <TableColumn fx:id="colDatumPocetka" text="Početak" prefWidth="100"/>
+                    <TableColumn fx:id="colDatumKraja" text="Kraj" prefWidth="100"/>
+                    <TableColumn fx:id="colStatus" text="Status" prefWidth="80"/>
+                    <TableColumn fx:id="colOpis" text="Opis" prefWidth="150"/>
+                </columns>
+            </TableView>
 
-    <Button text="Nazad" onAction="#goBack"/>
-</VBox>
+            <HBox spacing="10">
+                <Button text="Prihvati" onAction="#prihvatiUgovor"/>
+                <Button text="Odbij" onAction="#odbijUgovor"/>
+                <Button text="⬅ Nazad" onAction="#goBack"/>
+            </HBox>
+        </VBox>
+    </center>
+
+</BorderPane>

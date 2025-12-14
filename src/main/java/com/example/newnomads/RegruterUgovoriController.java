@@ -50,16 +50,35 @@ public class RegruterUgovoriController {
         // Učitavanje podataka iz baze
         loadUgovori();
     }
+    @FXML
+    private void dodajUgovor() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/newnomads/dodajUgovor.fxml"));
+            Stage stage = new Stage();
+            stage.setTitle("Dodaj novi ugovor");
+            stage.setScene(new Scene(loader.load()));
+            stage.showAndWait(); // Čekamo da se zatvori prije osvježavanja tabele
+
+            // Nakon zatvaranja, osvježimo tabelu
+            loadUgovori();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
     @FXML
     private void loadUgovori() {
         try (Connection conn = DB.getConnection()) {
 
-            String sql = "SELECT u.idUgovora, u.idFirme, u.idRadnika, u.datumPocetkaRada, u.datumKrajaRada, " +
-                    "u.statusUgovora, u.opis, r.ime, r.prezime, f.imeFirme, u.drzavaRadaId " +
-                    "FROM ugovor u " +
-                    "JOIN radnici r ON u.idRadnika = r.idRadnika " +
-                    "JOIN firmeKlijenti f ON u.idFirme = f.regruterId";
+            String sql = """
+                SELECT u.idUgovora, u.idFirme, u.idRadnika, u.datumPocetkaRada, u.datumKrajaRada,
+                       u.statusUgovora, u.opis, r.ime, r.prezime, f.imeFirme, u.drzavaRadaId
+                FROM ugovor u
+                JOIN radnici r ON u.idRadnika = r.idRadnika
+                JOIN firmeKlijenti f ON u.idFirme = f.idFirme
+            """;
+
 
             PreparedStatement stmt = conn.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();

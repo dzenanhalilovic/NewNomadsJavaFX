@@ -9,6 +9,18 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class UgovorDAO {
+    public static void updateStatusUgovora(int idUgovora, String status) {
+        String sql = "UPDATE ugovor SET statusUgovora = ? WHERE idUgovora = ?";
+        try (Connection conn = DB.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, status);
+            stmt.setInt(2, idUgovora);
+            stmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
     public static ObservableList<Ugovor> getUgovoriByFirmaId(int idFirme) {
         ObservableList<Ugovor> lista = FXCollections.observableArrayList();

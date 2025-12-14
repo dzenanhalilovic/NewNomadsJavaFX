@@ -19,4 +19,5 @@
     <TextField fx:id="brojRadnikaField" promptText="Broj radnika" prefWidth="300"/>
 
     <Button text="Objavi potražnju" onAction="#objaviPotraznju" prefWidth="200"/>
+
 </VBox>

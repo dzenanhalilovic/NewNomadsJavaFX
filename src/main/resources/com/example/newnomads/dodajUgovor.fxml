@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21.0.6"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.newnomads.DodajUgovorController">
+
+    <center>
+        <VBox spacing="10" alignment="CENTER">
+            <padding>
+                <Insets top="15" right="15" bottom="15" left="15"/>
+            </padding>
+
+            <Label text="Dodaj novi ugovor" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label text="Firma:" prefWidth="120"/>
+                <ComboBox fx:id="comboFirma" prefWidth="250"/>
+            </HBox>
+
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label text="Radnik:" prefWidth="120"/>
+                <ComboBox fx:id="comboRadnik" prefWidth="250"/>
+            </HBox>
+
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label text="Datum početka:" prefWidth="120"/>
+                <DatePicker fx:id="datePocetak" prefWidth="150"/>
+            </HBox>
+
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label text="Datum kraja:" prefWidth="120"/>
+                <DatePicker fx:id="dateKraj" prefWidth="150"/>
+            </HBox>
+
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label text="Status:" prefWidth="120"/>
+                <ComboBox fx:id="comboStatus" prefWidth="150"/>
+            </HBox>
+
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label text="Opis:" prefWidth="120" alignment="TOP_LEFT"/>
+                <TextArea fx:id="textOpis" prefWidth="250" prefHeight="80" wrapText="true"/>
+            </HBox>
+
+            <Button text="Pošalji ugovor" fx:id="btnPosalji" onAction="#posaljiUgovor" prefWidth="150"/>
+
+        </VBox>
+    </center>
+
+</BorderPane>

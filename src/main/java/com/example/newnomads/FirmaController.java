@@ -56,14 +56,19 @@ public class FirmaController {
     @FXML
     private void otvoriUgovore() {
         try {
-            // Koristimo neko postojeće dugme da dohvatimo Stage, npr. logout
             Stage stage = (Stage) logout.getScene().getWindow();
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/newnomads/ugovori.fxml"));
-            Scene scene = new Scene(fxmlLoader.load());
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/newnomads/ugovori.fxml"));
+            Scene scene = new Scene(loader.load());
+
+            // POŠALJI ID FIRME
+            FirmaUgovoriController controller = loader.getController();
+            controller.setIdFirme(Session.getIdFirme());
+
             stage.setScene(scene);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
 
 }

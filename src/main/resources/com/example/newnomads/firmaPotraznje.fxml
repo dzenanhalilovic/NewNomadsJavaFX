@@ -21,5 +21,5 @@
     </TableView>
 
     <Button fx:id="btnDodajPotraznju" text="Dodaj potražnju" onAction="#openDodajPotraznju"/>
-
+    <Button text="Nazad" onAction="#goBack"/>
 </VBox>
