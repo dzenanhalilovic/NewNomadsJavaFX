@@ -1,8 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<VBox xmlns="http://javafx.com/javafx/21.0.6" xmlns:fx="http://javafx.com/fxml/1" spacing="20" alignment="CENTER">
-    <Label text="Welcome, Admin!" style="-fx-font-size: 24px; -fx-text-fill: #2c3e50;" />
-</VBox>
+<StackPane xmlns="http://javafx.com/javafx/17"
+           xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="com.example.newnomads.AdminController"
+           prefWidth="1000" prefHeight="700">
+
+    <!-- Glavni sadržaj -->
+    <VBox spacing="15" alignment="TOP_CENTER">
+        <Label text="Admin Panel" style="-fx-font-size:22px;"/>
+        <HBox spacing="10" alignment="CENTER">
+            <Button text="Radnici" onAction="#showRadnici"/>
+            <Button text="Firme" onAction="#showFirme"/>
+            <Button text="Regruteri" onAction="#showRegruteri"/>
+            <Button text="Dodaj regrutera" onAction="#showAddRegruter"/>
+            <Button text="Dodaj radnika" onAction="#showAddRadnik"/>
+            <Button text="Logout" onAction="#logout"/>
+        </HBox>
+        <TableView fx:id="table" prefHeight="500" prefWidth="900"/>
+    </VBox>
+
+    <!-- Overlay modal -->
+    <StackPane fx:id="overlay" visible="false" managed="false"
+               style="-fx-background-color: rgba(0,0,0,0.3);"
+               prefWidth="1000" prefHeight="700" alignment="CENTER">
+
+        <!-- Regruter Box -->
+        <VBox fx:id="addRegruterBox" spacing="10" alignment="TOP_CENTER" visible="false"
+              style="-fx-background-color: white; -fx-border-color: gray; -fx-border-width: 1; -fx-padding:20;"
+              maxWidth="400" maxHeight="300">
+            <TextField fx:id="emailField" promptText="Email" maxWidth="350"/>
+            <PasswordField fx:id="passwordField" promptText="Password" maxWidth="350"/>
+            <TextField fx:id="imeField" promptText="Ime regrutera" maxWidth="350"/>
+            <HBox spacing="10" alignment="CENTER">
+                <Button text="Spremi" onAction="#addRegruter" maxWidth="150"/>
+                <Button text="Zatvori" onAction="#closeModal" maxWidth="150"/>
+            </HBox>
+            <Label fx:id="msg"/>
+        </VBox>
+
+        <!-- Radnik Box -->
+        <ScrollPane fx:id="addRadnikBox" visible="false" managed="false"
+                    maxWidth="500" maxHeight="600" fitToWidth="true" fitToHeight="true">
+            <content>
+                <VBox spacing="10" alignment="TOP_CENTER"
+                      style="-fx-background-color: white; -fx-border-color: gray; -fx-border-width: 1; -fx-padding:20;">
+                    <TextField fx:id="imeRadnikField" promptText="Ime" maxWidth="400"/>
+                    <TextField fx:id="prezimeRadnikField" promptText="Prezime" maxWidth="400"/>
+                    <TextField fx:id="brojPasosaField" promptText="Broj pasoša" maxWidth="400"/>
+                    <ComboBox fx:id="drzavaCombo" promptText="Država" maxWidth="400"/>
+                    <ComboBox fx:id="granaCombo" promptText="Grana rada" maxWidth="400"/>
+                    <ComboBox fx:id="spolCombo" promptText="Spol" maxWidth="400"/>
+                    <DatePicker fx:id="datumRodjenjaPicker" promptText="Datum rođenja" maxWidth="400"/>
+                    <DatePicker fx:id="doKadPasosPicker" promptText="Do kada traje pasoš" maxWidth="400"/>
+                    <DatePicker fx:id="doKadVizaPicker" promptText="Do kada traje viza (opcionalno)" maxWidth="400"/>
+                    <ComboBox fx:id="statusCombo" promptText="Status" maxWidth="400"/>
+                    <HBox spacing="10" alignment="CENTER">
+                        <Button text="Spremi" onAction="#addRadnik" maxWidth="150"/>
+                        <Button text="Zatvori" onAction="#closeModal" maxWidth="150"/>
+                    </HBox>
+                    <Label fx:id="msgRadnik"/>
+                </VBox>
+            </content>
+        </ScrollPane>
+
+    </StackPane>
+
+</StackPane>

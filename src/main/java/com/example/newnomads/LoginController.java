@@ -53,7 +53,11 @@ public class LoginController {
             FXMLLoader fxmlLoader;
 
             switch (role.toLowerCase()) {
-
+                case "admin":
+                    fxmlLoader = new FXMLLoader(getClass().getResource(
+                            "/com/example/newnomads/admin.fxml"
+                    ));
+                    break;
                 case "regruter":
                     fxmlLoader = new FXMLLoader(getClass().getResource(
                             "/com/example/newnomads/regruter.fxml"
