@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="10" alignment="CENTER" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.newnomads.FirmaUgovoriController">
+
+    <Label text="Ugovori firme" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+
+    <TableView fx:id="ugovoriTable" prefWidth="800" prefHeight="400">
+        <columns>
+            <TableColumn text="ID" prefWidth="50" fx:id="colId"/>
+            <TableColumn text="Radnik" prefWidth="150" fx:id="colRadnik"/>
+            <TableColumn text="Datum kreiranja" prefWidth="150" fx:id="colDatumKreiranja"/>
+            <TableColumn text="Datum početka" prefWidth="100" fx:id="colDatumPocetka"/>
+            <TableColumn text="Datum kraja" prefWidth="100" fx:id="colDatumKraja"/>
+            <TableColumn text="Status" prefWidth="100" fx:id="colStatus"/>
+            <TableColumn text="Opis" prefWidth="150" fx:id="colOpis"/>
+        </columns>
+    </TableView>
+
+    <Button text="Nazad" onAction="#goBack"/>
+</VBox>

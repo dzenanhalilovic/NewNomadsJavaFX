@@ -11,6 +11,7 @@
 
     <Button text="Moje potražnje" fx:id="potraznjeBtn" onAction="#openPotraznje" prefWidth="200"/>
     <Button text="Dostupni radnici" onAction="#openDostupniRadnici" prefWidth="220"/>
+    <Button text="Ugovori" onAction="#otvoriUgovore" prefWidth="220"/>
 
     <Button text="Logout" fx:id="logout" onAction="#logout" prefWidth="200"/>
 

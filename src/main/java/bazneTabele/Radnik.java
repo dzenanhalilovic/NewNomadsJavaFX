@@ -55,6 +55,7 @@ public class Radnik {
     public String getIme() { return ime.get(); }
     public String getPrezime() { return prezime.get(); }
     public int getDrzavaId() { return drzavaId.get(); }
+
     public int getGrana() { return granaId.get(); }
     public String getSpol() { return spol.get(); }
     public Date getDatumRodjenja() { return datumRodjenja.get(); }

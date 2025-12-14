@@ -53,5 +53,17 @@ public class FirmaController {
             e.printStackTrace();
         }
     }
+    @FXML
+    private void otvoriUgovore() {
+        try {
+            // Koristimo neko postojeće dugme da dohvatimo Stage, npr. logout
+            Stage stage = (Stage) logout.getScene().getWindow();
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/newnomads/ugovori.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            stage.setScene(scene);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 }

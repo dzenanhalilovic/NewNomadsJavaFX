@@ -1,5 +1,7 @@
 package com.example.newnomads;
 
+
+import bazneTabele.PotraznjaRadnika;
 import bazneTabele.Radnik;
 import javafx.collections.*;
 import javafx.fxml.FXML;
@@ -8,6 +10,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+
+import java.util.List;
 
 public class FirmaRadniciController {
 
@@ -26,7 +30,9 @@ public class FirmaRadniciController {
         colPrezime.setCellValueFactory(new PropertyValueFactory<>("prezime"));
         colSpol.setCellValueFactory(new PropertyValueFactory<>("spol"));
         colDrzava.setCellValueFactory(new PropertyValueFactory<>("drzavaId"));
-        colGrana.setCellValueFactory(new PropertyValueFactory<>("idGraneRada"));
+        colGrana.setCellValueFactory(new PropertyValueFactory<>("grana"));
+
+
         colPasos.setCellValueFactory(new PropertyValueFactory<>("doKadTrajePasos"));
         colViza.setCellValueFactory(new PropertyValueFactory<>("doKadTrajeViza"));
 
@@ -35,6 +41,7 @@ public class FirmaRadniciController {
 
         tableRadnici.setItems(lista);
     }
+
 
     @FXML
     private void goBack() {
