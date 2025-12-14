@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="10" alignment="CENTER"
+      xmlns="http://javafx.com/javafx/17"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.newnomads.FirmaRadniciController">
+
+    <Label text="Dostupni radnici"
+           style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+
+    <TableView fx:id="tableRadnici" prefWidth="900">
+
+        <columns>
+            <TableColumn fx:id="colIme" text="Ime"/>
+            <TableColumn fx:id="colPrezime" text="Prezime"/>
+            <TableColumn fx:id="colSpol" text="Spol"/>
+            <TableColumn fx:id="colDrzava" text="Država ID"/>
+            <TableColumn fx:id="colGrana" text="Grana rada"/>
+            <TableColumn fx:id="colPasos" text="Pasoš važi do"/>
+            <TableColumn fx:id="colViza" text="Viza važi do"/>
+        </columns>
+
+    </TableView>
+
+    <Button text="Nazad" onAction="#goBack"/>
+</VBox>

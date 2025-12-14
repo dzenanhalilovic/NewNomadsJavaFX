@@ -1,7 +1,7 @@
 package servisi;
 
-import com.example.newnomads.DB;
 import bazneTabele.Radnik;
+import com.example.newnomads.DB;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;

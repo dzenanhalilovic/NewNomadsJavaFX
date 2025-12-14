@@ -1,5 +1,6 @@
 package com.example.newnomads;
 
+import bazneTabele.Radnik;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -10,11 +11,11 @@ import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import bazneTabele.Radnik;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+
 
 public class RegruterRadniciController {
 

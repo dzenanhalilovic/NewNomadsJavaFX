@@ -41,4 +41,17 @@ public class FirmaController {
             e.printStackTrace();
         }
     }
+    @FXML
+    private void openDostupniRadnici() {
+        try {
+            Stage stage = (Stage) logout.getScene().getWindow();
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/com/example/newnomads/firmaRadnici.fxml")
+            );
+            stage.setScene(new Scene(loader.load()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }

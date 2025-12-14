@@ -10,6 +10,7 @@
     <Label text="Dobrodošli, Firma!" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
 
     <Button text="Moje potražnje" fx:id="potraznjeBtn" onAction="#openPotraznje" prefWidth="200"/>
+    <Button text="Dostupni radnici" onAction="#openDostupniRadnici" prefWidth="220"/>
 
     <Button text="Logout" fx:id="logout" onAction="#logout" prefWidth="200"/>
 
