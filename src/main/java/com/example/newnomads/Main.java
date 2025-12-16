@@ -21,8 +21,12 @@ public class Main extends Application {
         // Pokretanje login prozora
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/com/example/newnomads/login.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
+
         stage.setTitle("NewNomads Login");
         stage.setScene(scene);
+
+        stage.setFullScreen(true);
+
         stage.show();
     }
 

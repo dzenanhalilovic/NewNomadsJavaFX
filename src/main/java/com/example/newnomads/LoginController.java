@@ -6,6 +6,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 public class LoginController {
@@ -93,4 +95,14 @@ public class LoginController {
         Scene scene = new Scene(fxmlLoader.load());
         stage.setScene(scene);
     }
+
+    @FXML
+    private ImageView loginImage;
+
+    public void initialize() {
+        loginImage.setImage(new Image(getClass().getResource("/images/Logo.png").toExternalForm()));
+    }
+
+
+
 }
