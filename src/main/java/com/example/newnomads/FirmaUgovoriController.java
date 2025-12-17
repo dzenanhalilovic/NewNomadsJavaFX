@@ -37,6 +37,9 @@ public class FirmaUgovoriController {
         colDatumKraja.setCellValueFactory(data -> data.getValue().datumKrajaRadaProperty());
         colStatus.setCellValueFactory(data -> data.getValue().statusUgovoraProperty());
         colOpis.setCellValueFactory(data -> data.getValue().opisProperty());
+
+        ugovoriTable.setFixedCellSize(25);
+        ugovoriTable.setPrefHeight(25 * 5 + 28);
     }
 
     private void loadUgovori() {

@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
 
 <BorderPane xmlns="http://javafx.com/javafx/21.0.6"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.example.newnomads.FirmaUgovoriController">
+            fx:controller="com.example.newnomads.FirmaUgovoriController"
+            stylesheets="@../../../css/potraznja.css"
+            styleClass="root">
 
     <center>
         <VBox spacing="10" alignment="CENTER">
@@ -14,7 +15,11 @@
                 <Insets top="10" right="10" bottom="10" left="10"/>
             </padding>
 
-            <TableView fx:id="ugovoriTable" prefWidth="700" prefHeight="400">
+            <!-- Naslov -->
+            <Label text="Ugovori" styleClass="title-label"/>
+
+            <!-- Tabela -->
+            <TableView fx:id="ugovoriTable" prefWidth="700" prefHeight="400" styleClass="custom-table">
                 <columns>
                     <TableColumn fx:id="colId" text="ID" prefWidth="50"/>
                     <TableColumn fx:id="colRadnik" text="Radnik" prefWidth="120"/>
@@ -26,10 +31,11 @@
                 </columns>
             </TableView>
 
+            <!-- Dugmad -->
             <HBox spacing="10">
-                <Button text="Prihvati" onAction="#prihvatiUgovor"/>
-                <Button text="Odbij" onAction="#odbijUgovor"/>
-                <Button text="⬅ Nazad" onAction="#goBack"/>
+                <Button text="Prihvati" onAction="#prihvatiUgovor" styleClass="action-button"/>
+                <Button text="Odbij" onAction="#odbijUgovor" styleClass="action-button"/>
+                <Button text="⬅ Nazad" onAction="#goBack" styleClass="action-button"/>
             </HBox>
         </VBox>
     </center>

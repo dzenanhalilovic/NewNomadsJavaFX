@@ -2,6 +2,8 @@ package com.example.newnomads;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -17,10 +19,7 @@ public class RegisterController {
     @FXML private TextField vlasnikFirmeField;
     @FXML private TextArea oFirmiField;
 
-    @FXML
-    private void initialize() {
-        // Nema izbora role – uvijek firma
-    }
+
 
     @FXML
     private void register() throws Exception {
@@ -52,6 +51,7 @@ public class RegisterController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/newnomads/login.fxml"));
             Scene scene = new Scene(loader.load());
             stage.setScene(scene);
+            stage.setMaximized(true);
         } else {
             message.setText("Registracija nije uspjela!");
         }
@@ -63,5 +63,14 @@ public class RegisterController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/newnomads/login.fxml"));
         Scene scene = new Scene(loader.load());
         stage.setScene(scene);
+        stage.setMaximized(true);
     }
+
+    @FXML
+    private ImageView registerImage;
+
+    public void initialize() {
+        registerImage.setImage(new Image(getClass().getResource("/images/Logo.png").toExternalForm()));
+    }
+
 }

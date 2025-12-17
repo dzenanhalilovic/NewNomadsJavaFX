@@ -1,0 +1,64 @@
+/* Root StackPane */
+.stack-pane {
+    -fx-background-color:  #0f172a;
+    -fx-padding: 40;
+}
+.root {
+    -fx-background-color: linear-gradient(to bottom right, #1e293b, #0f172a);
+    -fx-padding: 40;
+}
+
+/* Naslovi tabela (Label iznad TableView) - bijeli tekst */
+.title-label {
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white; /* bijeli tekst */
+}
+
+/* TableView */
+.custom-table {
+    -fx-background-color: #0f172a;
+    -fx-border-color: #334155;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-table-cell-border-color: #334155;
+    -fx-font-size: 14px;
+    -fx-text-fill: white; /* tekst unutar ćelija */
+}
+
+/* Header TableView - crni tekst */
+.custom-table .column-header-background {
+    -fx-background-color: #1e293b; /* header pozadina */
+}
+
+.custom-table .column-header,
+.custom-table .column-header .label,
+.custom-table .filler {
+    -fx-text-fill: black;   /* crni tekst u headeru */
+    -fx-font-weight: bold;
+}
+
+/* Dugmad */
+.action-button {
+    -fx-pref-width: 180;
+    -fx-pref-height: 38;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-background-color: #38bdf8;
+    -fx-text-fill: #0f172a;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+}
+
+.action-button:hover {
+    -fx-background-color: #0ea5e9;
+}
+.action-button:pressed {
+    -fx-background-color: #0284c7;
+}
+
+/* ScrollPane */
+.scroll-pane {
+    -fx-background: transparent;
+    -fx-background-color: transparent;
+}

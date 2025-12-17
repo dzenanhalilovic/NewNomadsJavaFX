@@ -39,6 +39,8 @@ public class FirmaRadniciController {
         ObservableList<Radnik> lista =
                 FXCollections.observableArrayList(RadnikDAO.getSlobodniRadnici());
 
+        tableRadnici.setFixedCellSize(25);
+        tableRadnici.setPrefHeight(25 * 5 + 28);
         tableRadnici.setItems(lista);
     }
 

@@ -4,19 +4,57 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 public class FirmaController {
 
     @FXML
-    private Button logout; // mora odgovarati fx:id u FXML
+    private ImageView firmaLogo;
+
+    @FXML
+    private Button logout;
+
+    @FXML
+    private StackPane contentPane;
+
+    public void initialize() {
+        // Postavi logo
+        try {
+            firmaLogo.setImage(new Image(getClass().getResource("/images/Logo.png").toExternalForm()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // Opcionalno: možeš odmah učitati default sadržaj
+         loadContent("/com/example/newnomads/firmaPotraznje.fxml");
+    }
+
     @FXML
     private void openPotraznje() {
+        loadContent("/com/example/newnomads/firmaPotraznje.fxml");
+    }
+
+    @FXML
+    private void openDostupniRadnici() {
+        loadContent("/com/example/newnomads/firmaRadnici.fxml");
+    }
+
+    @FXML
+    private void otvoriUgovore() {
         try {
-            Stage stage = (Stage) logout.getScene().getWindow(); // koristimo logout dugme samo da uzmemo stage
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/newnomads/firmaPotraznje.fxml"));
-            Scene scene = new Scene(fxmlLoader.load());
-            stage.setScene(scene);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/newnomads/ugovori.fxml"));
+            Pane pane = loader.load();
+
+            // Pošalji ID firme kontroleru
+            FirmaUgovoriController controller = loader.getController();
+            controller.setIdFirme(Session.getIdFirme());
+
+            // Zamijeni sadržaj centralnog panela
+            contentPane.getChildren().setAll(pane);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -25,50 +63,26 @@ public class FirmaController {
     @FXML
     private void logout() {
         try {
-            // Dohvati trenutni stage preko dugmeta
             Stage stage = (Stage) logout.getScene().getWindow();
-
-            // Učitaj login scenu
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/newnomads/login.fxml"));
             Scene scene = new Scene(loader.load());
-
-            // Postavi login scenu
             stage.setScene(scene);
-            System.out.println("Logovana firma ID = " + Session.getIdFirme());
+            stage.setFullScreen(true);
 
-
+            System.out.println("Firma je logoutovana, ID = " + Session.getIdFirme());
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    @FXML
-    private void openDostupniRadnici() {
+
+    // Opšta metoda za učitavanje FXML-a u contentPane
+    private void loadContent(String fxmlPath) {
         try {
-            Stage stage = (Stage) logout.getScene().getWindow();
-            FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("/com/example/newnomads/firmaRadnici.fxml")
-            );
-            stage.setScene(new Scene(loader.load()));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+            Pane pane = loader.load();
+            contentPane.getChildren().setAll(pane);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    @FXML
-    private void otvoriUgovore() {
-        try {
-            Stage stage = (Stage) logout.getScene().getWindow();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/newnomads/ugovori.fxml"));
-            Scene scene = new Scene(loader.load());
-
-            // POŠALJI ID FIRME
-            FirmaUgovoriController controller = loader.getController();
-            controller.setIdFirme(Session.getIdFirme());
-
-            stage.setScene(scene);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-
 }

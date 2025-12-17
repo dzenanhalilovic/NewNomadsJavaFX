@@ -5,12 +5,16 @@
 <VBox spacing="10" alignment="CENTER"
       xmlns="http://javafx.com/javafx/17"
       xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.example.newnomads.FirmaRadniciController">
+      fx:controller="com.example.newnomads.FirmaRadniciController"
+      stylesheets="@../../../css/potraznja.css"
+      styleClass="root">
 
+    <!-- Naslov -->
     <Label text="Dostupni radnici"
-           style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+           styleClass="title-label"/>
 
-    <TableView fx:id="tableRadnici" prefWidth="900">
+    <!-- Tabela -->
+    <TableView fx:id="tableRadnici" prefWidth="900" styleClass="custom-table">
 
         <columns>
             <TableColumn fx:id="colIme" text="Ime"/>
@@ -24,5 +28,6 @@
 
     </TableView>
 
-    <Button text="Nazad" onAction="#goBack"/>
+    <!-- Dugme -->
+    <Button text="Nazad" onAction="#goBack" styleClass="action-button"/>
 </VBox>

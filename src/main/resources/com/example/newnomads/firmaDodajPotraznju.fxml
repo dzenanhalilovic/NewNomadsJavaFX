@@ -5,7 +5,8 @@
 <VBox spacing="15" alignment="CENTER"
       xmlns="http://javafx.com/javafx/17"
       xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.example.newnomads.FirmaDodajPotraznjuController">
+      fx:controller="com.example.newnomads.FirmaDodajPotraznjuController"
+      stylesheets="@../../../css/potraznja.css">
 
     <Label text="Dodaj potražnju" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
 

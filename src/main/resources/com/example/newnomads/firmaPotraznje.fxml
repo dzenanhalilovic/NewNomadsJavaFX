@@ -2,24 +2,36 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox spacing="15" alignment="CENTER"
-      xmlns="http://javafx.com/javafx/17"
-      xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.example.newnomads.FirmaPotraznjeController">
+<StackPane xmlns="http://javafx.com/javafx/17"
+           xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="com.example.newnomads.FirmaPotraznjeController"
+           stylesheets="@../../../css/potraznja.css"
+           styleClass="root">
 
-    <Label text="Moje potražnje" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+    <VBox spacing="30" alignment="CENTER">
 
-    <TableView fx:id="tablePotraznje" prefHeight="400" prefWidth="700">
-        <columns>
-            <TableColumn text="Naslov" fx:id="colNaslov"/>
-            <TableColumn text="Opis" fx:id="colOpis"/>
-            <TableColumn text="Grana" fx:id="colGrana"/>
-            <TableColumn text="Broj radnika" fx:id="colBrojRadnika"/>
-            <TableColumn text="Status" fx:id="colStatus"/>
-            <TableColumn text="Krajnji rok" fx:id="colRok"/>
-        </columns>
-    </TableView>
+        <!-- Naslov -->
+        <Label text="Moje potražnje" styleClass="title-label"/>
 
-    <Button fx:id="btnDodajPotraznju" text="Dodaj potražnju" onAction="#openDodajPotraznju"/>
-    <Button text="Nazad" onAction="#goBack"/>
-</VBox>
+        <!-- ScrollPane oko TableView -->
+        <ScrollPane fitToWidth="true" fitToHeight="true" maxWidth="800" maxHeight="155"
+                    styleClass="scroll-pane" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED">
+            <TableView fx:id="tablePotraznje" styleClass="custom-table" prefHeight="155">
+                <columns>
+                    <TableColumn text="Naslov" fx:id="colNaslov"/>
+                    <TableColumn text="Opis" fx:id="colOpis"/>
+                    <TableColumn text="Grana" fx:id="colGrana"/>
+                    <TableColumn text="Broj radnika" fx:id="colBrojRadnika"/>
+                    <TableColumn text="Status" fx:id="colStatus"/>
+                    <TableColumn text="Krajnji rok" fx:id="colRok"/>
+                </columns>
+            </TableView>
+        </ScrollPane>
+
+        <!-- Dugmad centrirana -->
+        <HBox spacing="20" alignment="CENTER">
+            <Button fx:id="btnDodajPotraznju" text="Dodaj potražnju" styleClass="action-button" onAction="#openDodajPotraznju"/>
+            <Button text="Nazad" styleClass="action-button" onAction="#goBack"/>
+        </HBox>
+    </VBox>
+</StackPane>

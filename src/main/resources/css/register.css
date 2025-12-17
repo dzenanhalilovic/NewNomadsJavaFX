@@ -1,0 +1,48 @@
+.root {
+    -fx-background-color: linear-gradient(to bottom right, #1e293b, #0f172a);
+}
+
+/* Kartica forme */
+.login-form {
+    -fx-background-color: rgba(15, 23, 42, 0.9);
+    -fx-padding: 40;
+    -fx-background-radius: 16;
+
+    -fx-min-width: 340;
+    -fx-max-width: 380;
+}
+
+/* Inputi */
+.text-field,
+.password-field,
+.text-area {
+    -fx-pref-width: 260;
+    -fx-background-color: #1e293b;
+    -fx-text-fill: white;
+    -fx-prompt-text-fill: #94a3b8;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-border-color: #334155;
+}
+
+/* Dugmad */
+.login-button {
+    -fx-pref-width: 260;
+    -fx-pref-height: 40;
+    -fx-background-color: #38bdf8;
+    -fx-text-fill: #0f172a;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8;
+}
+
+/* Naslov */
+.login-title {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
+/* Poruka */
+.error-label {
+    -fx-text-fill: #f87171;
+}

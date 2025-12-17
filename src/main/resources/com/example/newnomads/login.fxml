@@ -1,11 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
-<VBox spacing="10" alignment="CENTER" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.newnomads.LoginController">
-    <Label text="Login"/>
-    <TextField fx:id="emailField" promptText="Email"/>
-    <PasswordField fx:id="passwordField" promptText="Password"/>
-    <Button text="Login" onAction="#login"/>
-    <Button text="Register" onAction="#goToRegister"/>
-    <Label fx:id="message"/>
-</VBox>
+
+<StackPane xmlns="http://javafx.com/javafx/17"
+           xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="com.example.newnomads.LoginController"
+           stylesheets="@../../../css/login.css">
+
+    <!-- Lijevo i desno HBox -->
+    <HBox spacing="40" alignment="CENTER" StackPane.alignment="CENTER">
+
+        <!-- Lijeva strana: slika -->
+        <VBox alignment="CENTER">
+            <ImageView fx:id="loginImage"
+                       fitWidth="400" fitHeight="500" preserveRatio="true"
+                       pickOnBounds="true" smooth="true"/>
+        </VBox>
+
+        <!-- Desna strana: login forma -->
+        <VBox spacing="15" alignment="CENTER" styleClass="login-form">
+
+            <Label text="Prijava" styleClass="login-title"/>
+
+            <TextField fx:id="emailField" promptText="Email" prefWidth="250" maxWidth="250"/>
+            <PasswordField fx:id="passwordField" promptText="Šifra" prefWidth="250" maxWidth="250"/>
+
+            <Button text="Prijava" onAction="#login" styleClass="login-button" prefWidth="250" maxWidth="250"/>
+            <Button text="Registracija" onAction="#goToRegister" styleClass="login-button" prefWidth="250" maxWidth="250"/>
+
+            <Label fx:id="message" styleClass="error-label"/>
+        </VBox>
+    </HBox>
+
+</StackPane>

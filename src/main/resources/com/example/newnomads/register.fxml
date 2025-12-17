@@ -1,30 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
 
-<VBox spacing="12" alignment="CENTER"
-      xmlns="http://javafx.com/javafx/17"
+<HBox xmlns="http://javafx.com/javafx/17"
       xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.example.newnomads.RegisterController"
-      style="-fx-padding: 30;">
+      alignment="CENTER"
+      spacing="0"
+      styleClass="root"
+      stylesheets="@../../../css/login.css">
 
-    <Label text="Registracija firme" style="-fx-font-size: 22px;"/>
+    <!-- LIJEVA STRANA – LOGO -->
+    <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
+        <ImageView fx:id="registerImage"
+                   fitWidth="420"
+                   preserveRatio="true"/>
+    </VBox>
 
-    <TextField fx:id="imeField" promptText="Ime firme" prefWidth="250"/>
-    <TextField fx:id="emailField" promptText="Email" prefWidth="250"/>
-    <PasswordField fx:id="passwordField" promptText="Password" prefWidth="250"/>
+    <!-- DESNA STRANA – FORMA -->
+    <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
+        <VBox alignment="CENTER"
+              spacing="14"
+              styleClass="login-form">
 
-    <TextField fx:id="brojTelefonaField" promptText="Broj telefona" prefWidth="250"/>
-    <TextField fx:id="vlasnikFirmeField" promptText="Vlasnik firme (opcionalno)" prefWidth="250"/>
-    <TextArea fx:id="oFirmiField" promptText="O firmi (opcionalno)"
-              prefWidth="250" prefHeight="60"/>
+            <Label text="Registracija firme" styleClass="login-title"/>
 
-    <Button text="Registruj firmu" onAction="#register"
-            style="-fx-padding: 8 20; -fx-font-size: 14px;"/>
+            <TextField fx:id="imeField" promptText="Ime firme" maxWidth="320"/>
+            <TextField fx:id="emailField" promptText="Email" maxWidth="320"/>
+            <PasswordField fx:id="passwordField" promptText="Šifra" maxWidth="320"/>
 
-    <Button text="Idi na login" onAction="#goToLogin"
-            style="-fx-padding: 8 20;"/>
+            <TextField fx:id="brojTelefonaField" promptText="Broj telefona" maxWidth="320"/>
+            <TextField fx:id="vlasnikFirmeField" promptText="Vlasnik firme" maxWidth="320"/>
 
-    <Label fx:id="message" style="-fx-text-fill: red; -fx-font-size: 14px;"/>
-</VBox>
+            <TextArea fx:id="oFirmiField"
+                      promptText="O firmi"
+                      prefRowCount="3" maxWidth="320"/>
+
+            <Button text="Registruj firmu" styleClass="login-button" onAction="#register" />
+            <Button text="Nazad na login" styleClass="login-button" onAction="#goToLogin"/>
+
+            <Label fx:id="message" styleClass="error-label"/>
+        </VBox>
+    </VBox>
+
+</HBox>

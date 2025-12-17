@@ -1,18 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 
-<VBox spacing="20" alignment="CENTER"
-      xmlns="http://javafx.com/javafx/17"
-      xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.example.newnomads.FirmaController">
+<BorderPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.newnomads.FirmaController"
+            stylesheets="@../../../css/firma.css">
 
-    <Label text="Dobrodošli, Firma!" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+    <!-- LEFT region -->
+    <left>
+        <VBox spacing="20" style="-fx-background-color: #0f172a; -fx-padding: 20;">
+            <ImageView fx:id="firmaLogo" fitWidth="150" fitHeight="150" preserveRatio="true"/>
+            <Button text="Moje potražnje" fx:id="potraznjeBtn" onAction="#openPotraznje" styleClass="login-button"/>
+            <Button text="Dostupni radnici" onAction="#openDostupniRadnici" styleClass="login-button"/>
+            <Button text="Ugovori" onAction="#otvoriUgovore" styleClass="login-button"/>
+            <Button text="Logout" fx:id="logout" onAction="#logout" styleClass="login-button"/>
+        </VBox>
+    </left>
 
-    <Button text="Moje potražnje" fx:id="potraznjeBtn" onAction="#openPotraznje" prefWidth="200"/>
-    <Button text="Dostupni radnici" onAction="#openDostupniRadnici" prefWidth="220"/>
-    <Button text="Ugovori" onAction="#otvoriUgovore" prefWidth="220"/>
+    <!-- CENTER region -->
+    <center>
+        <StackPane fx:id="contentPane" style="-fx-background-color: #1e293b;"/>
+    </center>
 
-    <Button text="Logout" fx:id="logout" onAction="#logout" prefWidth="200"/>
+</BorderPane>
 
-</VBox>

@@ -34,7 +34,8 @@ public class FirmaPotraznjeController {
         colBrojRadnika.setCellValueFactory(new PropertyValueFactory<>("brojRadnika"));
         colStatus.setCellValueFactory(new PropertyValueFactory<>("statusPotraznje"));
         colRok.setCellValueFactory(new PropertyValueFactory<>("krajnjiRok"));
-
+        tablePotraznje.setFixedCellSize(25);
+        tablePotraznje.setPrefHeight(25 * 5 + 28);
         // Učitaj potražnje iz baze
         loadPotraznje();
     }
