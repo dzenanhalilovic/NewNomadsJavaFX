@@ -33,9 +33,14 @@
 
             <!-- Dugmad -->
             <HBox spacing="10">
-                <Button text="Prihvati" onAction="#prihvatiUgovor" styleClass="action-button"/>
-                <Button text="Odbij" onAction="#odbijUgovor" styleClass="action-button"/>
-                <Button text="⬅ Nazad" onAction="#goBack" styleClass="action-button"/>
+                <Button fx:id="btnPrihvati" text="Prihvati" onAction="#prihvatiUgovor"
+                        styleClass="action-button" visible="false"/>
+
+                <Button fx:id="btnOdbij" text="Odbij" onAction="#odbijUgovor"
+                        styleClass="action-button" visible="false"/>
+
+                <Button text="⬅ Nazad" onAction="#goBack"
+                        styleClass="action-button"/>
             </HBox>
         </VBox>
     </center>

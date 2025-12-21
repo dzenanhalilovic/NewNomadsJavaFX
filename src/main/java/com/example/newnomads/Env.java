@@ -10,7 +10,7 @@ public class Env {
     private static final Map<String, String> env = new HashMap<>();
 
     static {
-        try (BufferedReader br = new BufferedReader(new FileReader("C:/Users/upsil/OneDrive/Desktop/java/NewNomadsJavaFX/.env"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(".env"))) {
             String line;
             while ((line = br.readLine()) != null) {
                 line = line.trim();

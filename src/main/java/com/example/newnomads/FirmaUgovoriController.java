@@ -3,6 +3,7 @@ package com.example.newnomads;
 import bazneTabele.Ugovor;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
@@ -19,13 +20,14 @@ public class FirmaUgovoriController {
     @FXML private TableColumn<Ugovor, java.sql.Date> colDatumKraja;
     @FXML private TableColumn<Ugovor, String> colStatus;
     @FXML private TableColumn<Ugovor, String> colOpis;
+    @FXML private Button btnPrihvati;
+    @FXML private Button btnOdbij;
 
-    private int idFirme; // uklonjen hardkodirani 1
+    private int idFirme;
 
-    // Setter za idFirme koji se poziva pri otvaranju ove stranice
     public void setIdFirme(int idFirme) {
         this.idFirme = idFirme;
-        loadUgovori(); // odmah učitamo ugovore kad postavimo firmu
+        loadUgovori();
     }
 
     @FXML
@@ -38,12 +40,40 @@ public class FirmaUgovoriController {
         colStatus.setCellValueFactory(data -> data.getValue().statusUgovoraProperty());
         colOpis.setCellValueFactory(data -> data.getValue().opisProperty());
 
+        // Početno sakrij dugmad
+        azurirajVidljivostDugmadi(null);
+
+        // Dodajemo listener na selekciju u tabeli
+        ugovoriTable.getSelectionModel().selectedItemProperty().addListener((obs, staraSelekcija, novaSelekcija) -> {
+            azurirajVidljivostDugmadi(novaSelekcija);
+        });
+
         ugovoriTable.setFixedCellSize(25);
         ugovoriTable.setPrefHeight(25 * 5 + 28);
     }
 
+    private void azurirajVidljivostDugmadi(Ugovor ugovor) {
+        if (ugovor == null) {
+            btnPrihvati.setVisible(false);
+            btnPrihvati.setManaged(false);
+            btnOdbij.setVisible(false);
+            btnOdbij.setManaged(false);
+            return;
+        }
+
+        String status = ugovor.getStatusUgovora();
+
+        // Provjera uz ignorisanje velikih/malih slova i razmaka
+        boolean naCekanju = status != null && status.trim().equalsIgnoreCase("naCekanju");
+
+        btnPrihvati.setVisible(naCekanju);
+        btnPrihvati.setManaged(naCekanju);
+        btnOdbij.setVisible(naCekanju);
+        btnOdbij.setManaged(naCekanju);
+    }
+
     private void loadUgovori() {
-        if (idFirme <= 0) return; // ako nije postavljeno, ne radimo ništa
+        if (idFirme <= 0) return;
         ObservableList<Ugovor> lista = UgovorDAO.getUgovoriByFirmaId(idFirme);
         ugovoriTable.setItems(lista);
     }
@@ -52,9 +82,8 @@ public class FirmaUgovoriController {
     private void prihvatiUgovor() {
         Ugovor selektovan = ugovoriTable.getSelectionModel().getSelectedItem();
         if (selektovan != null) {
-            selektovan.setStatusUgovora("aktivan");
             UgovorDAO.updateStatusUgovora(selektovan.getIdUgovora(), "aktivan");
-            loadUgovori(); // osvježi tabelu
+            loadUgovori();
         }
     }
 
@@ -62,9 +91,8 @@ public class FirmaUgovoriController {
     private void odbijUgovor() {
         Ugovor selektovan = ugovoriTable.getSelectionModel().getSelectedItem();
         if (selektovan != null) {
-            selektovan.setStatusUgovora("odbijen");
             UgovorDAO.updateStatusUgovora(selektovan.getIdUgovora(), "odbijen");
-            loadUgovori(); // osvježi tabelu
+            loadUgovori();
         }
     }
 

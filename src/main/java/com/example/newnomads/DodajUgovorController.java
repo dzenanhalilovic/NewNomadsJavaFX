@@ -18,7 +18,7 @@ public class DodajUgovorController {
     @FXML private ComboBox<String> comboRadnik;
     @FXML private DatePicker datePocetak;
     @FXML private DatePicker dateKraj;
-    @FXML private ComboBox<String> comboStatus;
+    // @FXML private ComboBox<String> comboStatus; // OBRISANO - ne treba nam više
     @FXML private TextArea textOpis;
     @FXML private Button btnPosalji;
 
@@ -27,7 +27,7 @@ public class DodajUgovorController {
 
     @FXML
     private void initialize() {
-        comboStatus.getItems().addAll("aktivan", "naCekanju", "završen");
+        // comboStatus.getItems().addAll(...); // OBRISANO
         loadFirme();
         loadRadnici();
     }
@@ -62,42 +62,43 @@ public class DodajUgovorController {
     private void posaljiUgovor() {
         try (Connection conn = DB.getConnection()) {
 
-            if (comboFirma.getValue() == null || comboRadnik.getValue() == null || datePocetak.getValue() == null || comboStatus.getValue() == null) {
-                showAlert("Greška", "Popunite sve obavezne podatke!");
+            // Provjera - izbačen uslov za comboStatus
+            if (comboFirma.getValue() == null || comboRadnik.getValue() == null || datePocetak.getValue() == null) {
+                showAlert("Greška", "Popunite sva obavezna polja (Firma, Radnik, Datum početka)!");
                 return;
             }
 
-            // Izvlačenje idFirme i idRadnika iz combobox stringa
             int idFirme = Integer.parseInt(comboFirma.getValue().split(" - ")[0]);
             int idRadnika = Integer.parseInt(comboRadnik.getValue().split(" - ")[0]);
             Date datumPocetka = Date.valueOf(datePocetak.getValue());
             Date datumKraja = dateKraj.getValue() != null ? Date.valueOf(dateKraj.getValue()) : null;
-            String status = comboStatus.getValue();
+
+            // HARDKODIRAN STATUS: Uvijek ide kao naČekanju
+            String status = "naČekanju";
             String opis = textOpis.getText();
 
-            String sql = "INSERT INTO ugovor (idFirme, idRadnika, datumPocetkaRada, datumKrajaRada, statusUgovora, opis, drzavaRadaId) " +
-                    "VALUES (?, ?, ?, ?, ?, ?, ?)";
-            PreparedStatement stmt = conn.prepareStatement(sql);
+            String sql = "INSERT INTO ugovor (idFirme, idRadnika, datumPocetkaRada, datumKrajaRada, statusUgovora, opis, drzavaRadaId, datumKreiranja) " +
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)";
 
+            PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setInt(1, idFirme);
             stmt.setInt(2, idRadnika);
             stmt.setDate(3, datumPocetka);
             stmt.setDate(4, datumKraja);
-            stmt.setString(5, status);
+            stmt.setString(5, status); // Ovdje se šalje "naČekanju"
             stmt.setString(6, opis);
-            stmt.setInt(7, 1); // privremeno drzavaRadaId = 1, možeš kasnije dodati odabir
+            stmt.setInt(7, 1);
 
             int inserted = stmt.executeUpdate();
             if (inserted > 0) {
-                showAlert("Uspjeh", "Ugovor je uspješno poslan!");
-                // Zatvori prozor
+                showAlert("Uspjeh", "Ugovor je uspješno kreiran sa statusom 'na čekanju'!");
                 Stage stage = (Stage) btnPosalji.getScene().getWindow();
                 stage.close();
             }
 
         } catch (Exception e) {
             e.printStackTrace();
-            showAlert("Greška", "Došlo je do greške pri slanju ugovora.");
+            showAlert("Greška", "Došlo je do greške pri upisu u bazu.");
         }
     }
 

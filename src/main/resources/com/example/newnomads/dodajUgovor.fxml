@@ -37,11 +37,6 @@
             </HBox>
 
             <HBox spacing="10" alignment="CENTER_LEFT">
-                <Label text="Status:" prefWidth="120"/>
-                <ComboBox fx:id="comboStatus" prefWidth="150"/>
-            </HBox>
-
-            <HBox spacing="10" alignment="CENTER_LEFT">
                 <Label text="Opis:" prefWidth="120" alignment="TOP_LEFT"/>
                 <TextArea fx:id="textOpis" prefWidth="250" prefHeight="80" wrapText="true"/>
             </HBox>
