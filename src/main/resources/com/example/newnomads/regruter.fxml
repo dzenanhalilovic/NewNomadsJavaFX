@@ -1,36 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 
-<VBox spacing="15" alignment="CENTER"
-      xmlns="http://javafx.com/javafx/17"
-      xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.example.newnomads.RegruterController">
+<BorderPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.newnomads.RegruterController"
+            stylesheets="@../../../css/regruter.css">
 
-    <Label text="Dobrodošli, Regruter!"
-           style="-fx-font-size: 22px; -fx-font-weight: bold;" />
+    <!-- LEFT region - sidebar -->
+    <left>
+        <VBox spacing="20" styleClass="sidebar">
+            <ImageView fx:id="regruterLogo" fitWidth="150" fitHeight="150" preserveRatio="true"/>
+            <Button text="📋 Potražnje za radnicima" fx:id="potraznjeBtn" onAction="#openPotraznje" styleClass="sidebar-button"/>
+            <Button text="👷 Pregled radnika" fx:id="radniciBtn" onAction="#openRadnici" styleClass="sidebar-button"/>
+            <Button text="📄 Ugovori" fx:id="ugovoriBtn" onAction="#openUgovori" styleClass="sidebar-button"/>
+            <Button text="📝 Zahtjevi firmi" fx:id="zahtjeviBtn" onAction="#openZahtjevi" styleClass="sidebar-button"/>
+            <Button text="🚪 Logout" fx:id="logoutBtn" onAction="#logout" styleClass="sidebar-button"/>
+        </VBox>
+    </left>
 
-    <Button text="📋 Potražnje za radnicima"
-            onAction="#openPotraznje"
-            prefWidth="250"/>
+    <!-- CENTER region - dinamički sadržaj -->
+    <center>
+        <StackPane fx:id="contentPane" styleClass="content-pane"/>
+    </center>
 
-    <Button text="👷 Pregled radnika"
-            onAction="#openRadnici"
-            prefWidth="250"/>
-
-    <Button text="📄 Ugovori"
-            onAction="#openUgovori"
-            prefWidth="250"/>
-
-    <Button text="🔔 Zahtjevi firmi"
-            onAction="#openZahtjevi"
-            prefWidth="250"
-            style="-fx-background-color: #FF9800; -fx-text-fill: white; -fx-font-weight: bold;"/>
-
-    <Separator prefWidth="250"/>
-
-    <Button fx:id="logout"
-            text="🚪 Logout"
-            onAction="#logout"
-            prefWidth="250"/>
-</VBox>
+</BorderPane>

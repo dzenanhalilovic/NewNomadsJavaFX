@@ -2,19 +2,33 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox spacing="10" style="-fx-padding: 20;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.example.newnomads.RegruterZahtjeviController">
+<VBox spacing="20"
+      xmlns="http://javafx.com/javafx/17"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.newnomads.RegruterZahtjeviController"
+      stylesheets="@../../../css/potraznja.css"
+      styleClass="root"
+      style="-fx-padding: 20;">
 
-    <Label text="Zahtjevi firmi na čekanju" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+    <!-- Naslov -->
+    <Label text="Zahtjevi firmi na čekanju" styleClass="title-label"/>
 
-    <TableView fx:id="tableZahtjevi" VBox.vgrow="ALWAYS">
+    <!-- Tabela -->
+    <TableView fx:id="tableZahtjevi"
+               VBox.vgrow="ALWAYS"
+               styleClass="custom-table">
+
         <columns>
             <TableColumn fx:id="colFirma" text="Firma" prefWidth="150"/>
             <TableColumn fx:id="colRadnik" text="Radnik" prefWidth="150"/>
             <TableColumn fx:id="colOpis" text="Napomena" prefWidth="250"/>
-            <TableColumn fx:id="colAkcija" text="Odobri/Odbij" prefWidth="200"/>
+            <TableColumn fx:id="colAkcija" text="Odobri / Odbij" prefWidth="200"/>
         </columns>
     </TableView>
 
-    <Button text="Nazad" onAction="#goBack"/>
+    <!-- Dugme -->
+    <Button text="Nazad"
+            onAction="#goBack"
+            styleClass="action-button"/>
+
 </VBox>

@@ -6,42 +6,56 @@
 
 <BorderPane xmlns="http://javafx.com/javafx/21.0.6"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.example.newnomads.DodajUgovorController">
+            fx:controller="com.example.newnomads.DodajUgovorController"
+            stylesheets="@../../../css/potraznja.css"
+            styleClass="root">
 
     <center>
-        <VBox spacing="10" alignment="CENTER">
+        <VBox spacing="20" alignment="CENTER">
+
             <padding>
-                <Insets top="15" right="15" bottom="15" left="15"/>
+                <Insets top="20" right="20" bottom="20" left="20"/>
             </padding>
 
-            <Label text="Dodaj novi ugovor" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+            <!-- Naslov -->
+            <Label text="Dodaj novi ugovor" styleClass="title-label"/>
 
+            <!-- Firma -->
             <HBox spacing="10" alignment="CENTER_LEFT">
-                <Label text="Firma:" prefWidth="120"/>
+                <Label text="Firma:" prefWidth="120" styleClass="form-label"/>
                 <ComboBox fx:id="comboFirma" prefWidth="250"/>
             </HBox>
 
+            <!-- Radnik -->
             <HBox spacing="10" alignment="CENTER_LEFT">
-                <Label text="Radnik:" prefWidth="120"/>
+                <Label text="Radnik:" prefWidth="120" styleClass="form-label"/>
                 <ComboBox fx:id="comboRadnik" prefWidth="250"/>
             </HBox>
 
+            <!-- Datum početka -->
             <HBox spacing="10" alignment="CENTER_LEFT">
-                <Label text="Datum početka:" prefWidth="120"/>
+                <Label text="Datum početka:" prefWidth="120" styleClass="form-label"/>
                 <DatePicker fx:id="datePocetak" prefWidth="150"/>
             </HBox>
 
+            <!-- Datum kraja -->
             <HBox spacing="10" alignment="CENTER_LEFT">
-                <Label text="Datum kraja:" prefWidth="120"/>
+                <Label text="Datum kraja:" prefWidth="120" styleClass="form-label"/>
                 <DatePicker fx:id="dateKraj" prefWidth="150"/>
             </HBox>
 
+            <!-- Opis -->
             <HBox spacing="10" alignment="CENTER_LEFT">
-                <Label text="Opis:" prefWidth="120" alignment="TOP_LEFT"/>
+                <Label text="Opis:" prefWidth="120" alignment="TOP_LEFT" styleClass="form-label"/>
                 <TextArea fx:id="textOpis" prefWidth="250" prefHeight="80" wrapText="true"/>
             </HBox>
 
-            <Button text="Pošalji ugovor" fx:id="btnPosalji" onAction="#posaljiUgovor" prefWidth="150"/>
+            <!-- Dugme -->
+            <Button text="Pošalji ugovor"
+                    fx:id="btnPosalji"
+                    onAction="#posaljiUgovor"
+                    styleClass="action-button"
+                    prefWidth="180"/>
 
         </VBox>
     </center>

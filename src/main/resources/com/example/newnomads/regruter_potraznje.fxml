@@ -2,22 +2,38 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.geometry.*?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.newnomads.RegruterPotraznjeController"
-            prefWidth="600" prefHeight="400">
+<StackPane xmlns="http://javafx.com/javafx/17"
+           xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="com.example.newnomads.RegruterPotraznjeController"
+           stylesheets="@../../../css/potraznja.css"
+           styleClass="root">
 
-    <TableView fx:id="potraznjeTable" layoutX="20" layoutY="20" prefWidth="560" prefHeight="300">
-        <columns>
-            <TableColumn fx:id="idCol" text="ID" prefWidth="30"/>
-            <TableColumn fx:id="naslovCol" text="Naslov" prefWidth="130"/>
-            <TableColumn fx:id="granaCol" text="Grana rada" prefWidth="100"/>
-            <TableColumn fx:id="firmaCol" text="Firma" prefWidth="90"/>
-            <TableColumn fx:id="statusCol" text="Status" prefWidth="80"/>
-            <TableColumn fx:id="akcijaCol" text="Akcija" prefWidth="110"/>
-        </columns>
-    </TableView>
+    <VBox spacing="30" alignment="CENTER">
 
-    <Button text="Nazad" layoutX="20" layoutY="340" onAction="#goBack"/>
-</AnchorPane>
+        <!-- Naslov -->
+        <Label text="Potražnje firmi" styleClass="title-label"/>
 
+        <!-- Tabela -->
+        <TableView fx:id="potraznjeTable"
+                   prefWidth="800"
+                   prefHeight="300"
+                   styleClass="custom-table">
+
+            <columns>
+                <TableColumn fx:id="idCol" text="ID" prefWidth="40"/>
+                <TableColumn fx:id="naslovCol" text="Naslov" prefWidth="150"/>
+                <TableColumn fx:id="granaCol" text="Grana rada" prefWidth="130"/>
+                <TableColumn fx:id="firmaCol" text="Firma" prefWidth="120"/>
+                <TableColumn fx:id="statusCol" text="Status" prefWidth="100"/>
+                <TableColumn fx:id="akcijaCol" text="Akcija" prefWidth="120"/>
+            </columns>
+        </TableView>
+
+        <!-- Dugme -->
+        <Button text="Nazad"
+                styleClass="action-button"
+                onAction="#goBack"/>
+
+    </VBox>
+</StackPane>

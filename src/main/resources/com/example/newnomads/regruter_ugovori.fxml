@@ -6,30 +6,47 @@
 
 <BorderPane xmlns="http://javafx.com/javafx/21.0.6"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.example.newnomads.RegruterUgovoriController">
+            fx:controller="com.example.newnomads.RegruterUgovoriController"
+            stylesheets="@../../../css/potraznja.css"
+            styleClass="root">
 
-    <!-- Center: tabela + dugmad -->
     <center>
-        <VBox spacing="10" alignment="CENTER">
+        <VBox spacing="25" alignment="CENTER">
+
             <padding>
-                <Insets top="10" right="10" bottom="10" left="10"/>
+                <Insets top="20" right="20" bottom="20" left="20"/>
             </padding>
 
-            <TableView fx:id="ugovoriTable" prefHeight="400" prefWidth="600">
+            <!-- Naslov -->
+            <Label text="Ugovori" styleClass="title-label"/>
+
+            <!-- Tabela -->
+            <TableView fx:id="ugovoriTable"
+                       prefHeight="400"
+                       prefWidth="900"
+                       styleClass="custom-table">
+
                 <columns>
-                    <TableColumn fx:id="radnikCol" text="Radnik" prefWidth="120"/>
-                    <TableColumn fx:id="firmaCol" text="Firma" prefWidth="120"/>
-                    <TableColumn fx:id="datumPocetkaCol" text="Datum početka" prefWidth="100"/>
-                    <TableColumn fx:id="datumKrajaCol" text="Datum kraja" prefWidth="100"/>
-                    <TableColumn fx:id="statusCol" text="Status" prefWidth="80"/>
-                    <TableColumn fx:id="opisCol" text="Opis/Napomena" prefWidth="180"/>
+                    <TableColumn fx:id="radnikCol" text="Radnik" prefWidth="140"/>
+                    <TableColumn fx:id="firmaCol" text="Firma" prefWidth="140"/>
+                    <TableColumn fx:id="datumPocetkaCol" text="Datum početka" prefWidth="120"/>
+                    <TableColumn fx:id="datumKrajaCol" text="Datum kraja" prefWidth="120"/>
+                    <TableColumn fx:id="statusCol" text="Status" prefWidth="100"/>
+                    <TableColumn fx:id="opisCol" text="Opis / Napomena" prefWidth="220"/>
                 </columns>
             </TableView>
 
-            <HBox spacing="10">
-                <Button text="⬅ Nazad" onAction="#goBack"/>
-                <Button text="Dodaj ugovor" onAction="#dodajUgovor"/>
+            <!-- Dugmad -->
+            <HBox spacing="20" alignment="CENTER">
+                <Button text="⬅ Nazad"
+                        onAction="#goBack"
+                        styleClass="action-button"/>
+
+                <Button text="Dodaj ugovor"
+                        onAction="#dodajUgovor"
+                        styleClass="action-button"/>
             </HBox>
+
         </VBox>
     </center>
 
