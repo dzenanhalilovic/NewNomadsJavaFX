@@ -3,20 +3,26 @@
 <?import javafx.scene.layout.*?>
 
 <VBox spacing="10" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.example.newnomads.RegruterRadniciController">
+      fx:controller="com.example.newnomads.RegruterRadniciController"
+      style="-fx-padding: 20;">
 
     <HBox spacing="10">
-        <ComboBox fx:id="comboDrzava" promptText="Filtriraj po državi"/>
-        <ComboBox fx:id="comboGrana" promptText="Filtriraj po grani rada"/>
-        <Button text="Filtriraj" onAction="#filterRadnici"/>
+        <ComboBox fx:id="comboDrzava" promptText="Sve države"/>
+        <ComboBox fx:id="comboGrana" promptText="Sve grane rada"/>
+        <Button text="Filtriraj" onAction="#filterRadnici" style="-fx-background-color: #4CAF50; -fx-text-fill: white;"/>
+        <Button text="Resetuj" onAction="#resetFilters"/>
     </HBox>
 
-    <TableView fx:id="radniciTable" prefHeight="400">
+    <TableView fx:id="radniciTable" prefHeight="400" VBox.vgrow="ALWAYS">
         <columns>
-            <TableColumn fx:id="imeCol" text="Ime"/>
-            <TableColumn fx:id="prezimeCol" text="Prezime"/>
-            <TableColumn fx:id="drzavaCol" text="Država"/>
-            <TableColumn fx:id="granaCol" text="Grana rada"/>
+            <TableColumn fx:id="imeCol" text="Ime" prefWidth="100"/>
+            <TableColumn fx:id="prezimeCol" text="Prezime" prefWidth="100"/>
+            <TableColumn fx:id="drzavaCol" text="Država" prefWidth="100"/>
+            <TableColumn fx:id="granaCol" text="Grana rada" prefWidth="130"/>
+
+            <TableColumn fx:id="statusCol" text="Status" prefWidth="150"/>
+
+            <TableColumn fx:id="ugovorCol" text="Akcija" prefWidth="130"/>
         </columns>
     </TableView>
 

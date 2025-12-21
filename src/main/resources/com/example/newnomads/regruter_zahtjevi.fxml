@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="10" style="-fx-padding: 20;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.newnomads.RegruterZahtjeviController">
+
+    <Label text="Zahtjevi firmi na čekanju" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+
+    <TableView fx:id="tableZahtjevi" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="colFirma" text="Firma" prefWidth="150"/>
+            <TableColumn fx:id="colRadnik" text="Radnik" prefWidth="150"/>
+            <TableColumn fx:id="colOpis" text="Napomena" prefWidth="250"/>
+            <TableColumn fx:id="colAkcija" text="Odobri/Odbij" prefWidth="200"/>
+        </columns>
+    </TableView>
+
+    <Button text="Nazad" onAction="#goBack"/>
+</VBox>

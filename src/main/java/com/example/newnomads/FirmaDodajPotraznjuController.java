@@ -7,7 +7,10 @@ import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 
+import java.sql.Connection;
 import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.Timestamp;
 
 public class FirmaDodajPotraznjuController {
@@ -20,48 +23,82 @@ public class FirmaDodajPotraznjuController {
 
     @FXML
     public void initialize() {
-        // primjer učitavanja grana
-        granaCombo.getItems().addAll("Građevina", "Ugostiteljstvo", "IT", "Zdravstvo");
+        // Pozivamo metodu koja puni ComboBox podacima iz baze
+        ucitajGrane();
+    }
+
+    private void ucitajGrane() {
+        // SQL upit za tvoju tabelu granaRada
+        String sql = "SELECT nazivGraneRada FROM granaRada ORDER BY nazivGraneRada ASC";
+
+        try (Connection conn = DB.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+
+            granaCombo.getItems().clear();
+
+            while (rs.next()) {
+                // Dodajemo nazive iz kolone nazivGraneRada u ComboBox
+                granaCombo.getItems().add(rs.getString("nazivGraneRada"));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            // Alert u slučaju da baza nije dostupna
+            System.out.println("Greška pri učitavanju grana rada.");
+        }
     }
 
     @FXML
     private void objaviPotraznju() {
-        String naslov = naslovField.getText();
-        String opis = opisField.getText();
-        Date rok = Date.valueOf(rokPicker.getValue());
-        String grana = granaCombo.getValue();
-        int brojRadnika = Integer.parseInt(brojRadnikaField.getText());
+        // Osnovna validacija da polja nisu prazna
+        if (naslovField.getText().isEmpty() || granaCombo.getValue() == null || rokPicker.getValue() == null) {
+            new Alert(Alert.AlertType.WARNING, "Popunite sva polja!").show();
+            return;
+        }
 
-        int idFirme = Session.getIdFirme(); // koristiš session da dobiješ firmu koja je prijavljena
+        try {
+            String naslov = naslovField.getText();
+            String opis = opisField.getText();
+            Date rok = Date.valueOf(rokPicker.getValue());
+            String grana = granaCombo.getValue();
+            int brojRadnika = Integer.parseInt(brojRadnikaField.getText());
 
-        PotraznjaRadnika p = new PotraznjaRadnika(
-                0, // id će se auto generisati
-                new Timestamp(System.currentTimeMillis()),
-                1, // drzavaId placeholder
-                idFirme,
-                rok,
-                naslov,
-                opis,
-                "Aktivna",
-                grana,
-                brojRadnika
-        );
+            int idFirme = Session.getIdFirme();
 
-        boolean uspjeh = PotraznjaDAO.dodajPotraznju(p);
+            PotraznjaRadnika p = new PotraznjaRadnika(
+                    0,
+                    new Timestamp(System.currentTimeMillis()),
+                    1,
+                    idFirme,
+                    rok,
+                    naslov,
+                    opis,
+                    "Aktivna",
+                    grana,
+                    brojRadnika
+            );
 
-        if (uspjeh) {
-            // vrati na listu potražnji
-            try {
-                Stage stage = (Stage) naslovField.getScene().getWindow();
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/newnomads/firmaPotraznje.fxml"));
-                Scene scene = new Scene(fxmlLoader.load());
-                stage.setScene(scene);
-            } catch (Exception e) {
-                e.printStackTrace();
+            boolean uspjeh = PotraznjaDAO.dodajPotraznju(p);
+
+            if (uspjeh) {
+                vratiNaListu();
+            } else {
+                new Alert(Alert.AlertType.ERROR, "Greška pri dodavanju potražnje!").show();
             }
-        } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Greška pri dodavanju potražnje!");
-            alert.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void vratiNaListu() {
+        try {
+            Stage stage = (Stage) naslovField.getScene().getWindow();
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/newnomads/firmaPotraznje.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            stage.setScene(scene);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

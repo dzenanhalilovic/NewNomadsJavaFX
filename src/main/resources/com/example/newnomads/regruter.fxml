@@ -22,6 +22,11 @@
             onAction="#openUgovori"
             prefWidth="250"/>
 
+    <Button text="🔔 Zahtjevi firmi"
+            onAction="#openZahtjevi"
+            prefWidth="250"
+            style="-fx-background-color: #FF9800; -fx-text-fill: white; -fx-font-weight: bold;"/>
+
     <Separator prefWidth="250"/>
 
     <Button fx:id="logout"

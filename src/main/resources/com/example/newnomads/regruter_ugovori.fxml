@@ -22,6 +22,7 @@
                     <TableColumn fx:id="datumPocetkaCol" text="Datum početka" prefWidth="100"/>
                     <TableColumn fx:id="datumKrajaCol" text="Datum kraja" prefWidth="100"/>
                     <TableColumn fx:id="statusCol" text="Status" prefWidth="80"/>
+                    <TableColumn fx:id="opisCol" text="Opis/Napomena" prefWidth="180"/>
                 </columns>
             </TableView>
 

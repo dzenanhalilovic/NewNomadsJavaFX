@@ -7,27 +7,25 @@
       xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.example.newnomads.FirmaRadniciController"
       stylesheets="@../../../css/potraznja.css"
-      styleClass="root">
+      styleClass="root"
+      style="-fx-padding: 20;">
 
-    <!-- Naslov -->
-    <Label text="Dostupni radnici"
-           styleClass="title-label"/>
+    <Label text="Dostupni radnici" styleClass="title-label" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
 
-    <!-- Tabela -->
-    <TableView fx:id="tableRadnici" prefWidth="900" styleClass="custom-table">
-
+    <TableView fx:id="tableRadnici" prefWidth="1000" VBox.vgrow="ALWAYS" styleClass="custom-table">
         <columns>
-            <TableColumn fx:id="colIme" text="Ime"/>
-            <TableColumn fx:id="colPrezime" text="Prezime"/>
-            <TableColumn fx:id="colSpol" text="Spol"/>
-            <TableColumn fx:id="colDrzava" text="Država ID"/>
-            <TableColumn fx:id="colGrana" text="Grana rada"/>
-            <TableColumn fx:id="colPasos" text="Pasoš važi do"/>
-            <TableColumn fx:id="colViza" text="Viza važi do"/>
-        </columns>
+            <TableColumn fx:id="colIme" text="Ime" prefWidth="100"/>
+            <TableColumn fx:id="colPrezime" text="Prezime" prefWidth="100"/>
+            <TableColumn fx:id="colSpol" text="Spol" prefWidth="80"/>
+            <TableColumn fx:id="colDrzava" text="Država ID" prefWidth="80"/>
+            <TableColumn fx:id="colGrana" text="Grana rada" prefWidth="120"/>
+            <TableColumn fx:id="colPasos" text="Pasoš važi do" prefWidth="120"/>
+            <TableColumn fx:id="colViza" text="Viza važi do" prefWidth="120"/>
 
+            <TableColumn fx:id="colAkcija" text="Akcija" prefWidth="120"/>
+        </columns>
     </TableView>
 
-    <!-- Dugme -->
-    <Button text="Nazad" onAction="#goBack" styleClass="action-button"/>
+    <Button text="⬅ Nazad" onAction="#goBack" styleClass="action-button"
+            style="-fx-padding: 10 20; -fx-cursor: hand;"/>
 </VBox>

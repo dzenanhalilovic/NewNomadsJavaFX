@@ -9,7 +9,7 @@ module com.example.newnomads {
     requires org.kordamp.bootstrapfx.core;
     requires java.sql;
     requires io.github.cdimascio.dotenv.java;
-
+    requires java.desktop;
 
 
     opens com.example.newnomads to javafx.fxml;

@@ -9,10 +9,12 @@
 
     <TableView fx:id="potraznjeTable" layoutX="20" layoutY="20" prefWidth="560" prefHeight="300">
         <columns>
-            <TableColumn fx:id="idCol" text="ID" prefWidth="50"/>
-            <TableColumn fx:id="naslovCol" text="Naslov" prefWidth="200"/>
-            <TableColumn fx:id="firmaCol" text="Firma" prefWidth="100"/>
-            <TableColumn fx:id="statusCol" text="Status" prefWidth="100"/>
+            <TableColumn fx:id="idCol" text="ID" prefWidth="30"/>
+            <TableColumn fx:id="naslovCol" text="Naslov" prefWidth="130"/>
+            <TableColumn fx:id="granaCol" text="Grana rada" prefWidth="100"/>
+            <TableColumn fx:id="firmaCol" text="Firma" prefWidth="90"/>
+            <TableColumn fx:id="statusCol" text="Status" prefWidth="80"/>
+            <TableColumn fx:id="akcijaCol" text="Akcija" prefWidth="110"/>
         </columns>
     </TableView>
 
