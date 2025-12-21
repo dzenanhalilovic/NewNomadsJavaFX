@@ -76,16 +76,28 @@ public class RegruterRadniciController {
                             otvoriProzorZaUgovor(r);
                         });
                     }
+
                     @Override
                     protected void updateItem(Void item, boolean empty) {
                         super.updateItem(item, empty);
-                        if (empty) setGraphic(null);
-                        else setGraphic(btn);
+                        if (empty) {
+                            setGraphic(null);
+                        } else {
+                            Radnik r = getTableView().getItems().get(getIndex());
+                            String status = r.getStatus();
+                            if (status != null && status.split(" \\| ").length > 2 &&
+                                    status.split(" \\| ")[2].equalsIgnoreCase("slobodan")) {
+                                setGraphic(btn); // Prikaži dugme samo ako je slobodan
+                            } else {
+                                setGraphic(null); // Nema dugmeta za ostale
+                            }
+                        }
                     }
                 };
             }
         });
     }
+
 
     private void otvoriProzorZaUgovor(Radnik r) {
         try {
