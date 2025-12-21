@@ -2,6 +2,7 @@ package com.example.newnomads;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -15,6 +16,11 @@ public class LoginController {
     @FXML private TextField emailField;
     @FXML private PasswordField passwordField;
     @FXML private Label message;
+    @FXML private ImageView loginImage;
+
+    public void initialize() {
+        loginImage.setImage(new Image(getClass().getResource("/images/Logo.png").toExternalForm()));
+    }
 
     @FXML
     private void login() {
@@ -42,9 +48,7 @@ public class LoginController {
             }
 
             openDashboard(user.getRole());
-        }
-
-        else {
+        } else {
             message.setText("Pogrešan email ili password!");
         }
     }
@@ -56,30 +60,27 @@ public class LoginController {
 
             switch (role.toLowerCase()) {
                 case "admin":
-                    fxmlLoader = new FXMLLoader(getClass().getResource(
-                            "/com/example/newnomads/admin.fxml"
-                    ));
+                    fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/newnomads/admin.fxml"));
                     break;
                 case "regruter":
-                    fxmlLoader = new FXMLLoader(getClass().getResource(
-                            "/com/example/newnomads/regruter.fxml"
-                    ));
+                    fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/newnomads/regruter.fxml"));
                     break;
-
                 case "firma":
-                    fxmlLoader = new FXMLLoader(getClass().getResource(
-                            "/com/example/newnomads/firma.fxml"
-                    ));
+                    fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/newnomads/firma.fxml"));
                     break;
-
                 default:
                     message.setText("Nepoznata uloga: " + role);
                     return;
             }
 
-            Scene scene = new Scene(fxmlLoader.load());
-            stage.setFullScreen(true);
+            Parent root = fxmlLoader.load();
+            Scene scene = new Scene(root);
+
+            // prvo postavi scenu
             stage.setScene(scene);
+
+            // tek nakon toga full screen / maximized
+            StageUtils.setFullScreen(stage);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -88,22 +89,22 @@ public class LoginController {
     }
 
     @FXML
-    private void goToRegister() throws Exception {
-        Stage stage = (Stage) emailField.getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(
-                getClass().getResource("/com/example/newnomads/register.fxml")
-        );
-        Scene scene = new Scene(fxmlLoader.load());
+    private void goToRegister() {
+        try {
+            Stage stage = (Stage) emailField.getScene().getWindow();
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/newnomads/register.fxml"));
+            Parent root = fxmlLoader.load();
+            Scene scene = new Scene(root);
 
-        stage.setScene(scene);
-        stage.setFullScreen(true);
+            // prvo postavi scenu
+            stage.setScene(scene);
+
+            // tek nakon toga full screen / maximized
+            StageUtils.setFullScreen(stage);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            message.setText("Greška pri otvaranju registracije!");
+        }
     }
-
-    @FXML
-    private ImageView loginImage;
-
-    public void initialize() {
-        loginImage.setImage(new Image(getClass().getResource("/images/Logo.png").toExternalForm()));
-    }
-
 }
