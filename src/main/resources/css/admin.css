@@ -1,0 +1,85 @@
+/* =========================
+   ADMIN PANEL CSS
+   ========================= */
+
+/* Root StackPane */
+.admin-root {
+    -fx-background-color: #0f172a;
+    -fx-padding: 40;
+}
+
+/* Naslov Admin panela */
+.admin-title {
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
+/* Dugmad glavnog panela i unutar modala */
+.admin-button {
+    -fx-pref-width: 150;
+    -fx-pref-height: 36;
+    -fx-font-weight: bold;
+    -fx-background-color: #38bdf8;
+    -fx-text-fill: #0f172a;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+}
+
+.admin-button:hover {
+    -fx-background-color: #0ea5e9;
+}
+
+.admin-button:pressed {
+    -fx-background-color: #0284c7;
+}
+
+/* Tabela Admin panela */
+.admin-table {
+    -fx-background-color: #0f172a;
+    -fx-border-color: #334155;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-table-cell-border-color: #334155;
+    -fx-font-size: 14px;
+    -fx-text-fill: white;
+}
+
+.admin-table .column-header-background {
+    -fx-background-color: #1e293b;
+}
+
+.admin-table .column-header,
+.admin-table .column-header .label,
+.admin-table .filler {
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+}
+
+/* Overlay */
+.admin-overlay {
+    -fx-background-color: rgba(15, 23, 42, 0.7);
+}
+
+/* Modal Boxes */
+.admin-modal {
+    -fx-background-color: #1e293b;
+    -fx-border-color: #334155;
+    -fx-border-width: 1;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-padding: 20;
+}
+
+/* TextField, PasswordField, ComboBox, DatePicker, TextArea unutar modala */
+.admin-modal .text-field,
+.admin-modal .password-field,
+.admin-modal .combo-box,
+.admin-modal .date-picker,
+.admin-modal .text-area {
+    -fx-background-color: #0f172a;
+    -fx-text-fill: white;
+    -fx-border-color: #334155;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+}

@@ -62,3 +62,55 @@
     -fx-background: transparent;
     -fx-background-color: transparent;
 }
+.filter-bar {
+    -fx-background-color: #1e293b;
+    -fx-padding: 12 16;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-border-color: #334155;
+}
+
+/* ComboBox */
+.filter-combo {
+    -fx-pref-width: 180;
+    -fx-background-color: #0f172a;
+    -fx-text-fill: white;
+    -fx-border-color: #334155;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+}
+
+/* Dugmad za filter */
+.filter-button {
+    -fx-pref-height: 36;
+    -fx-padding: 0 18;
+    -fx-font-weight: bold;
+    -fx-background-color: #38bdf8;
+    -fx-text-fill: #0f172a;
+    -fx-background-radius: 6;
+    -fx-cursor: hand;
+}
+
+.filter-button:hover {
+    -fx-background-color: #0ea5e9;
+}
+
+.filter-button:pressed {
+    -fx-background-color: #0284c7;
+}
+
+/* Sekundarno dugme (Resetuj) */
+.filter-button.secondary {
+    -fx-background-color: #475569;
+    -fx-text-fill: white;
+}
+
+.filter-button.secondary:hover {
+    -fx-background-color: #64748b;
+}
+/* Label u formama za unos ugovora */
+.form-label {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+

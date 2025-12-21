@@ -2,50 +2,97 @@ package com.example.newnomads;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button; // OBAVEZNO OVAJ IMPORT, NE java.awt.*
+import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
 
 public class RegruterController {
 
-    // @FXML referenca na dugme iz FXML-a (fx:id="logout")
-    @FXML private Button logout;
+    @FXML private StackPane contentPane;
+    @FXML private ImageView regruterLogo;
 
+    @FXML private Button potraznjeBtn;
+    @FXML private Button radniciBtn;
+    @FXML private Button ugovoriBtn;
+    @FXML private Button zahtjeviBtn;
+    @FXML private Button logoutBtn;
+
+    public void initialize() {
+        // Postavi logo
+        regruterLogo.setImage(new Image(getClass().getResource("/images/Logo.png").toExternalForm()));
+
+        // Po defaultu učitaj Potražnje u StackPane
+        try {
+            loadContent("/com/example/newnomads/regruter_potraznje.fxml");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /** ==== StackPane učitavanje ==== */
     @FXML
-    private void openPotraznje(ActionEvent event) {
-        switchScene(event, "/com/example/newnomads/regruter_potraznje.fxml", "Potražnje za radnicima");
+    private void openPotraznje() {
+        try {
+            loadContent("/com/example/newnomads/regruter_potraznje.fxml");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
-    private void openRadnici(ActionEvent event) {
-        switchScene(event, "/com/example/newnomads/regruter_radnici.fxml", "Pregled radnika");
+    private void openRadnici() {
+        try {
+            loadContent("/com/example/newnomads/regruter_radnici.fxml");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
-    private void openUgovori(ActionEvent event) {
-        switchScene(event, "/com/example/newnomads/regruter_ugovori.fxml", "Ugovori");
+    private void openUgovori() {
+        try {
+            loadContent("/com/example/newnomads/regruter_ugovori.fxml");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
-    private void openZahtjevi(ActionEvent event) {
-        switchScene(event, "/com/example/newnomads/regruter_zahtjevi.fxml", "Zahtjevi firmi");
+    private void openZahtjevi() {
+        try {
+            loadContent("/com/example/newnomads/regruter_zahtjevi.fxml");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
+    /** ==== Logout preko pune promjene scene ==== */
     @FXML
     private void logout(ActionEvent event) {
-        Session.clear(); // Očisti sesiju pri odjavi
-        switchScene(event, "/com/example/newnomads/login.fxml", "Login");
+        try {
+            Session.clear(); // očisti sesiju
+            switchScene(event, "/com/example/newnomads/login.fxml", "Login");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    /**
-     * Univerzalna metoda za promjenu scene koristeći ActionEvent
-     */
+    /** Helper za StackPane učitavanje */
+    private void loadContent(String fxmlPath) throws Exception {
+        Parent content = FXMLLoader.load(getClass().getResource(fxmlPath));
+        contentPane.getChildren().setAll(content);
+    }
+
+    /** Helper za punu promjenu scene */
     private void switchScene(ActionEvent event, String fxmlPath, String title) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
-            // Dohvatamo Stage preko izvora događaja (dugmeta koje je kliknuto)
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(loader.load()));
             stage.setTitle(title);
