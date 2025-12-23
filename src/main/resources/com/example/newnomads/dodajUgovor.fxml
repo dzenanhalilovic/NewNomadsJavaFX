@@ -26,6 +26,12 @@
                 <ComboBox fx:id="comboFirma" prefWidth="250"/>
             </HBox>
 
+            <!-- Potražnja -->
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label text="Potražnja:" prefWidth="120" styleClass="form-label"/>
+                <ComboBox fx:id="comboPotraznje" prefWidth="250" promptText="Izaberite potražnju"/>
+            </HBox>
+
             <!-- Radnik -->
             <HBox spacing="10" alignment="CENTER_LEFT">
                 <Label text="Radnik:" prefWidth="120" styleClass="form-label"/>

@@ -9,18 +9,20 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class UgovorDAO {
+
     public static void updateStatusUgovora(int idUgovora, String status) {
         String sql = "UPDATE ugovor SET statusUgovora = ? WHERE idUgovora = ?";
         try (Connection conn = DB.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
+
             stmt.setString(1, status);
             stmt.setInt(2, idUgovora);
             stmt.executeUpdate();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
 
     public static ObservableList<Ugovor> getUgovoriByFirmaId(int idFirme) {
         ObservableList<Ugovor> lista = FXCollections.observableArrayList();
@@ -50,8 +52,9 @@ public class UgovorDAO {
                             rs.getDate("datumKrajaRada"),
                             rs.getString("statusUgovora"),
                             rs.getString("opis"),
-                            rs.getString("imeRadnika") + " " + rs.getString("prezimeRadnika"),
-                            rs.getString("nazivFirme")
+                            rs.getString("imeRadnika") + " " + rs.getString("prezimeRadnika"), // radnik
+                            rs.getString("nazivFirme"),                                         // firma
+                            rs.getInt("idPotraznjeRadnika")                                     // sada stvarni idPotraznjeRadnika
                     );
                     lista.add(ugovor);
                 }
