@@ -78,6 +78,7 @@
     -fx-border-color: #334155;
     -fx-border-radius: 6;
     -fx-background-radius: 6;
+
 }
 
 /* Dugmad za filter */
@@ -112,5 +113,8 @@
 .form-label {
     -fx-text-fill: white;
     -fx-font-weight: bold;
+}
+.filter-combo .text {
+    -fx-fill: white;
 }
 

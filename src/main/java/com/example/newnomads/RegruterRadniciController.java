@@ -5,6 +5,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
@@ -101,23 +102,27 @@ public class RegruterRadniciController {
 
     private void otvoriProzorZaUgovor(Radnik r) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/newnomads/dodajUgovor.fxml"));
-            Scene scene = new Scene(loader.load());
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/com/example/newnomads/dodajUgovor.fxml")
+            );
 
-            // Uzimamo kontroler prozora za dodavanje ugovora
+            Parent root = loader.load(); // 👈 OVO JE BITNO
+
             DodajUgovorController ctrl = loader.getController();
-
-            // Proslijeđujemo selektovanog radnika i firmu (ako je došla iz potražnje)
             ctrl.setPodaci(r, proslijedjenIdFirme);
 
-            Stage stage = new Stage();
-            stage.setTitle("Novi ugovor: " + r.getIme() + " " + r.getPrezime());
+            Stage stage = (Stage) radniciTable.getScene().getWindow();
+
+            Scene scene = new Scene(root);
+
             stage.setScene(scene);
-            stage.show();
+            StageUtils.setFullScreen(stage);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
 
     public void filtrirajPoGrani(String nazivGrane, int idFirme) {
         this.proslijedjenIdFirme = idFirme; // Pamti firmu za koju tražimo radnika
