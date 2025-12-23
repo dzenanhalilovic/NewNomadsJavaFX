@@ -1,21 +1,31 @@
-/* Root StackPane */
+/* ===============================
+   ROOT / BACKGROUND
+   =============================== */
+
 .stack-pane {
-    -fx-background-color:  #0f172a;
+    -fx-background-color: #0f172a;
     -fx-padding: 40;
 }
+
 .root {
     -fx-background-color: linear-gradient(to bottom right, #1e293b, #0f172a);
     -fx-padding: 40;
 }
 
-/* Naslovi tabela (Label iznad TableView) - bijeli tekst */
+/* ===============================
+   NASLOVI
+   =============================== */
+
 .title-label {
     -fx-font-size: 28px;
     -fx-font-weight: bold;
-    -fx-text-fill: white; /* bijeli tekst */
+    -fx-text-fill: white;
 }
 
-/* TableView */
+/* ===============================
+   TABLE VIEW
+   =============================== */
+
 .custom-table {
     -fx-background-color: #0f172a;
     -fx-border-color: #334155;
@@ -23,22 +33,25 @@
     -fx-background-radius: 8;
     -fx-table-cell-border-color: #334155;
     -fx-font-size: 14px;
-    -fx-text-fill: white; /* tekst unutar ćelija */
+    -fx-text-fill: white;
 }
 
-/* Header TableView - crni tekst */
+/* Header */
 .custom-table .column-header-background {
-    -fx-background-color: #1e293b; /* header pozadina */
+    -fx-background-color: #1e293b;
 }
 
 .custom-table .column-header,
 .custom-table .column-header .label,
 .custom-table .filler {
-    -fx-text-fill: black;   /* crni tekst u headeru */
+    -fx-text-fill: black;
     -fx-font-weight: bold;
 }
 
-/* Dugmad */
+/* ===============================
+   DUGMAD
+   =============================== */
+
 .action-button {
     -fx-pref-width: 180;
     -fx-pref-height: 38;
@@ -53,15 +66,24 @@
 .action-button:hover {
     -fx-background-color: #0ea5e9;
 }
+
 .action-button:pressed {
     -fx-background-color: #0284c7;
 }
 
-/* ScrollPane */
+/* ===============================
+   SCROLL
+   =============================== */
+
 .scroll-pane {
     -fx-background: transparent;
     -fx-background-color: transparent;
 }
+
+/* ===============================
+   FILTER BAR
+   =============================== */
+
 .filter-bar {
     -fx-background-color: #1e293b;
     -fx-padding: 12 16;
@@ -70,18 +92,64 @@
     -fx-border-color: #334155;
 }
 
-/* ComboBox */
+/* ===============================
+   FILTER COMBOBOX – OSNOVNO
+   =============================== */
+
 .filter-combo {
     -fx-pref-width: 180;
-    -fx-background-color: #0f172a;
-    -fx-text-fill: white;
+    -fx-background-color: White;
     -fx-border-color: #334155;
     -fx-border-radius: 6;
     -fx-background-radius: 6;
-
 }
 
-/* Dugmad za filter */
+/* ===============================
+   FILTER COMBOBOX – SAMO OVA STRANICA
+   =============================== */
+
+/* ZATVORENO STANJE */
+.filter-bar .filter-combo .text {
+    -fx-fill: black; /* CRNA slova */
+}
+
+/* Strelica */
+.filter-bar .filter-combo .arrow {
+    -fx-background-color: black;
+}
+
+/* ===============================
+   DROPDOWN POPUP
+   =============================== */
+
+/* Pozadina dropdowna */
+.filter-bar .filter-combo .list-view {
+    -fx-background-color: white;
+    -fx-border-color: #334155;
+}
+
+/* Stavke */
+.filter-bar .filter-combo .list-cell {
+    -fx-background-color: white;
+    -fx-text-fill: white;
+}
+
+/* Hover */
+.filter-bar .filter-combo .list-cell:hover {
+    -fx-background-color: #2196F3;
+    -fx-text-fill: white;
+}
+
+/* Selektovano */
+.filter-bar .filter-combo .list-cell:selected {
+    -fx-background-color: #2196F3;
+    -fx-text-fill: white;
+}
+
+/* ===============================
+   FILTER DUGMAD
+   =============================== */
+
 .filter-button {
     -fx-pref-height: 36;
     -fx-padding: 0 18;
@@ -100,7 +168,7 @@
     -fx-background-color: #0284c7;
 }
 
-/* Sekundarno dugme (Resetuj) */
+/* Reset dugme */
 .filter-button.secondary {
     -fx-background-color: #475569;
     -fx-text-fill: white;
@@ -109,12 +177,12 @@
 .filter-button.secondary:hover {
     -fx-background-color: #64748b;
 }
-/* Label u formama za unos ugovora */
+
+/* ===============================
+   FORM LABELS
+   =============================== */
+
 .form-label {
     -fx-text-fill: white;
     -fx-font-weight: bold;
 }
-.filter-combo .text {
-    -fx-fill: white;
-}
-

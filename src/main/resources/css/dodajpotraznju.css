@@ -19,15 +19,15 @@
 }
 
 /* ===============================
-   SVA INPUT POLJA
+   SVA INPUT POLJA – OSNOVA
 ================================ */
 .text-field,
-.text-area,
 .combo-box,
 .date-picker {
     -fx-pref-width: 400;
-    -fx-max-width: 400;/* ista širina za sva polja */
+    -fx-max-width: 400;
     -fx-font-size: 14px;
+
     -fx-background-color: #1e293b;
     -fx-text-fill: white;
     -fx-prompt-text-fill: #94a3b8;
@@ -38,9 +38,8 @@
     -fx-border-width: 1;
 }
 
-/* Fokus na input polja */
+/* Fokus */
 .text-field:focused,
-.text-area:focused,
 .combo-box:focused,
 .date-picker:focused {
     -fx-border-color: #38bdf8;
@@ -48,10 +47,37 @@
 }
 
 /* ===============================
-   TEXTAREA STYLING
+   TEXTAREA – ISPRAVNO STILIZOVANA
 ================================ */
 .text-area {
+    -fx-pref-width: 400;
+    -fx-max-width: 400;
     -fx-pref-height: 100;
+
+    -fx-font-size: 14px;
+    -fx-text-fill: white;
+
+    -fx-background-color: #0f172a;
+    -fx-background-radius: 8;
+
+    -fx-border-radius: 8;
+    -fx-border-color: #334155;
+}
+
+/* UNUTRAŠNJI CONTENT (OBAVEZNO) */
+.text-area .content {
+    -fx-background-color: #0f172a;
+    -fx-text-fill: white;
+}
+
+/* Fokus TextArea */
+.text-area:focused {
+    -fx-border-color: #38bdf8;
+}
+
+/* Prompt tekst */
+.text-area .prompt-text {
+    -fx-fill: #94a3b8;
 }
 
 /* ===============================
@@ -59,6 +85,7 @@
 ================================ */
 .combo-box {
     -fx-pref-height: 38;
+    -fx-text-fill: white;
 }
 
 /* ===============================
@@ -68,48 +95,18 @@
     -fx-pref-height: 38;
 }
 
-/* DatePicker editor */
+/* Editor DatePicker-a */
 .date-picker .editor {
     -fx-background-color: #1e293b;
     -fx-text-fill: white;
     -fx-prompt-text-fill: #94a3b8;
 }
 
-/* Arrow button */
+/* Dugme sa strelicom */
 .date-picker .arrow-button {
     -fx-background-color: #1e293b;
-    -fx-background-radius: 8;
     -fx-border-color: #334155;
-}
-
-/* Popup kalendara */
-.date-picker-popup {
-    -fx-background-color: #1e2a3b; /* tamnija plava */
-    -fx-border-radius: 8;
     -fx-background-radius: 8;
-}
-
-/* Sakrivamo brojeve sedmica */
-.date-picker-popup .week-number-cell {
-    -fx-opacity: 0;
-    -fx-min-width: 0;
-    -fx-max-width: 0;
-    -fx-padding: 0;
-}
-
-/* Dani i mjeseci */
-.date-picker-popup .day-cell,
-.date-picker-popup .month-year-pane,
-.date-picker-popup .week-days {
-    -fx-background-color: #2a3a50; /* svijetlija nijansa plave */
-    -fx-text-fill: white;
-
-}
-
-/* Hover na dan */
-.date-picker-popup .day-cell:hover {
-    -fx-background-color: #38bdf8;
-    -fx-text-fill: #0f172a;
 }
 
 /* ===============================
@@ -129,12 +126,12 @@
     -fx-cursor: hand;
 }
 
-/* Hover efekat */
+/* Hover */
 .action-button:hover {
     -fx-background-color: #0ea5e9;
 }
 
-/* Klik efekat */
+/* Klik */
 .action-button:pressed {
     -fx-background-color: #0284c7;
 }

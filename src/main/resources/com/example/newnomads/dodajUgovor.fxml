@@ -21,37 +21,37 @@
             <Label text="Dodaj novi ugovor" styleClass="title-label"/>
 
             <!-- Firma -->
-            <HBox spacing="10" alignment="CENTER_LEFT">
+            <HBox spacing="10" alignment="CENTER">
                 <Label text="Firma:" prefWidth="120" styleClass="form-label"/>
                 <ComboBox fx:id="comboFirma" prefWidth="250"/>
             </HBox>
 
             <!-- Potražnja -->
-            <HBox spacing="10" alignment="CENTER_LEFT">
+            <HBox spacing="10" alignment="CENTER">
                 <Label text="Potražnja:" prefWidth="120" styleClass="form-label"/>
                 <ComboBox fx:id="comboPotraznje" prefWidth="250" promptText="Izaberite potražnju"/>
             </HBox>
 
             <!-- Radnik -->
-            <HBox spacing="10" alignment="CENTER_LEFT">
+            <HBox spacing="10" alignment="CENTER">
                 <Label text="Radnik:" prefWidth="120" styleClass="form-label"/>
                 <ComboBox fx:id="comboRadnik" prefWidth="250"/>
             </HBox>
 
             <!-- Datum početka -->
-            <HBox spacing="10" alignment="CENTER_LEFT">
-                <Label text="Datum početka:" prefWidth="120" styleClass="form-label"/>
-                <DatePicker fx:id="datePocetak" prefWidth="150"/>
+            <HBox spacing="10" alignment="CENTER">
+                <Label text="Datum početka:" prefWidth="120" minWidth="120" styleClass="form-label"/>
+                <DatePicker fx:id="datePocetak" prefWidth="250"/>
             </HBox>
 
             <!-- Datum kraja -->
-            <HBox spacing="10" alignment="CENTER_LEFT">
-                <Label text="Datum kraja:" prefWidth="120" styleClass="form-label"/>
-                <DatePicker fx:id="dateKraj" prefWidth="150"/>
+            <HBox spacing="10" alignment="CENTER">
+                <Label text="Datum kraja:" prefWidth="120" minHeight="120" styleClass="form-label"/>
+                <DatePicker fx:id="dateKraj" prefWidth="250"/>
             </HBox>
 
             <!-- Opis -->
-            <HBox spacing="10" alignment="CENTER_LEFT">
+            <HBox spacing="10" alignment="CENTER">
                 <Label text="Opis:" prefWidth="120" alignment="TOP_LEFT" styleClass="form-label"/>
                 <TextArea fx:id="textOpis" prefWidth="250" prefHeight="80" wrapText="true"/>
             </HBox>
