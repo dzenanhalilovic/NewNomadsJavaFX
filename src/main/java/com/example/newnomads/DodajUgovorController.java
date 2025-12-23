@@ -4,6 +4,8 @@ import bazneTabele.Radnik;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
@@ -129,7 +131,12 @@ public class DodajUgovorController {
                 azurirajStatusRadnika(idRadnika, "zaposlen");
                 showAlert("Uspjeh", "Ugovor je uspješno kreiran!");
                 Stage stage = (Stage) btnPosalji.getScene().getWindow();
-                stage.close();
+                FXMLLoader loader = new FXMLLoader(
+                        getClass().getResource("/com/example/newnomads/regruter_ugovori.fxml")
+                );
+                Scene scene = new Scene(loader.load());
+                stage.setScene(scene);
+                StageUtils.setFullScreen(stage);
             }
 
         } catch (Exception e) {
