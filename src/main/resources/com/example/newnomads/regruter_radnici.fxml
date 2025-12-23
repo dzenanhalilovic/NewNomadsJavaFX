@@ -29,7 +29,7 @@
 
         <Button text="Resetuj"
                 onAction="#resetFilters"
-                styleClass="filter-button secondary"/>
+                styleClass="filter-button"/>
 
     </HBox>
 
