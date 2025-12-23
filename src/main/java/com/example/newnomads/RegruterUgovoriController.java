@@ -26,7 +26,7 @@ public class RegruterUgovoriController {
     @FXML private TableColumn<Ugovor, String> datumPocetkaCol;
     @FXML private TableColumn<Ugovor, String> datumKrajaCol;
     @FXML private TableColumn<Ugovor, String> statusCol;
-    @FXML private TableColumn<Ugovor, String> opisCol; // DODATO: Nova kolona za opis
+    @FXML private TableColumn<Ugovor, String> opisCol; // kolona za opis
 
     private ObservableList<Ugovor> ugovori = FXCollections.observableArrayList();
 
@@ -50,7 +50,7 @@ public class RegruterUgovoriController {
 
         statusCol.setCellValueFactory(data -> data.getValue().statusUgovoraProperty());
 
-        // POVEZIVANJE OPISA:
+        // Povezivanje opisa
         opisCol.setCellValueFactory(data ->
                 new SimpleStringProperty(data.getValue().getOpis() != null ? data.getValue().getOpis() : "")
         );
@@ -63,8 +63,9 @@ public class RegruterUgovoriController {
         try (Connection conn = DB.getConnection()) {
 
             String sql = """
-                SELECT u.idUgovora, u.idFirme, u.idRadnika, u.datumPocetkaRada, u.datumKrajaRada,
-                       u.statusUgovora, u.opis, r.ime, r.prezime, f.imeFirme, u.drzavaRadaId, u.datumKreiranja
+                SELECT u.idUgovora, u.idFirme, u.idRadnika, u.idPotraznjeRadnika,
+                       u.datumPocetkaRada, u.datumKrajaRada, u.statusUgovora, u.opis,
+                       r.ime, r.prezime, f.imeFirme, u.drzavaRadaId, u.datumKreiranja
                 FROM ugovor u
                 JOIN radnici r ON u.idRadnika = r.idRadnika
                 JOIN firmeKlijenti f ON u.idFirme = f.idFirme
@@ -78,7 +79,6 @@ public class RegruterUgovoriController {
             while (rs.next()) {
                 String imePrezime = rs.getString("ime") + " " + rs.getString("prezime");
 
-                // Izvlačenje SQL datuma direktno
                 Date sqlDatumPocetka = rs.getDate("datumPocetkaRada");
                 Date sqlDatumKraja = rs.getDate("datumKrajaRada");
                 Timestamp datumKreiranja = rs.getTimestamp("datumKreiranja");
@@ -94,7 +94,8 @@ public class RegruterUgovoriController {
                         rs.getString("statusUgovora"),
                         rs.getString("opis"),
                         imePrezime,
-                        rs.getString("imeFirme")
+                        rs.getString("imeFirme"),
+                        rs.getInt("idPotraznjeRadnika") // <-- OBAVEZNO DODATI
                 ));
             }
 
@@ -114,7 +115,7 @@ public class RegruterUgovoriController {
             stage.setScene(new Scene(loader.load()));
             stage.showAndWait();
 
-            loadUgovori(); // Osvježi tabelu nakon što se prozor zatvori
+            loadUgovori(); // Osvježi tabelu nakon zatvaranja prozora
         } catch (Exception e) {
             e.printStackTrace();
         }

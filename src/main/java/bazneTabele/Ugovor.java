@@ -15,8 +15,11 @@ public class Ugovor {
     private final ObjectProperty<Date> datumKrajaRada;
     private final StringProperty statusUgovora;
     private final StringProperty opis;
-    private final StringProperty radnik;   // novo
-    private final StringProperty firma;    // novo
+    private final StringProperty radnik;   // ime radnika
+    private final StringProperty firma;    // ime firme
+
+    // NOVO: id potražnje radnika
+    private final IntegerProperty idPotraznjeRadnika;
 
     public Ugovor(int idUgovora,
                   int idFirme,
@@ -28,7 +31,8 @@ public class Ugovor {
                   String statusUgovora,
                   String opis,
                   String radnik,
-                  String firma) {
+                  String firma,
+                  int idPotraznjeRadnika) {
 
         this.idUgovora = new SimpleIntegerProperty(idUgovora);
         this.idFirme = new SimpleIntegerProperty(idFirme);
@@ -41,6 +45,7 @@ public class Ugovor {
         this.opis = new SimpleStringProperty(opis != null ? opis : "");
         this.radnik = new SimpleStringProperty(radnik != null ? radnik : "");
         this.firma = new SimpleStringProperty(firma != null ? firma : "");
+        this.idPotraznjeRadnika = new SimpleIntegerProperty(idPotraznjeRadnika);
     }
 
     // Property metode
@@ -55,6 +60,7 @@ public class Ugovor {
     public StringProperty opisProperty() { return opis; }
     public StringProperty radnikProperty() { return radnik; }
     public StringProperty firmaProperty() { return firma; }
+    public IntegerProperty idPotraznjeRadnikaProperty() { return idPotraznjeRadnika; }
 
     // Getteri
     public int getIdUgovora() { return idUgovora.get(); }
@@ -68,15 +74,15 @@ public class Ugovor {
     public String getOpis() { return opis.get(); }
     public String getRadnik() { return radnik.get(); }
     public String getFirma() { return firma.get(); }
+    public int getIdPotraznjeRadnika() { return idPotraznjeRadnika.get(); }
 
     // Setteri
     public void setStatusUgovora(String statusUgovora) { this.statusUgovora.set(statusUgovora); }
     public void setOpis(String opis) { this.opis.set(opis); }
+    public void setIdPotraznjeRadnika(int id) { this.idPotraznjeRadnika.set(id); }
 
     @Override
     public String toString() {
         return "Ugovor " + idUgovora.get() + " (Radnik: " + radnik.get() + ", Firma: " + firma.get() + ")";
     }
-
-
 }

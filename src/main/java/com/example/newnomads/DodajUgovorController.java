@@ -17,6 +17,7 @@ public class DodajUgovorController {
 
     @FXML private ComboBox<String> comboFirma;
     @FXML private ComboBox<String> comboRadnik;
+    @FXML private ComboBox<String> comboPotraznje;
     @FXML private DatePicker datePocetak;
     @FXML private DatePicker dateKraj;
     @FXML private TextArea textOpis;
@@ -24,38 +25,18 @@ public class DodajUgovorController {
 
     private ObservableList<String> firmeList = FXCollections.observableArrayList();
     private ObservableList<String> radniciList = FXCollections.observableArrayList();
+    private ObservableList<String> potraznjeList = FXCollections.observableArrayList();
 
     @FXML
     private void initialize() {
         loadFirme();
         loadRadnici();
 
+        // Postavi listener za comboFirma da filtrira potražnje po firmi
+        comboFirma.setOnAction(event -> loadPotraznjeZaFirmu());
+
         // Postavi današnji datum kao podrazumevani početak rada
         datePocetak.setValue(LocalDate.now());
-    }
-
-    /**
-     * METODA ZA AUTO-POPUNJAVANJE (Poziva se iz RegruterRadniciController)
-     */
-    public void setPodaci(Radnik radnik, int idFirme) {
-        // 1. Selektuj radnika
-        if (radnik != null) {
-            String radnikString = radnik.getIdRadnika() + " - " + radnik.getIme() + " " + radnik.getPrezime();
-            if (!comboRadnik.getItems().contains(radnikString)) {
-                comboRadnik.getItems().add(radnikString);
-            }
-            comboRadnik.setValue(radnikString);
-        }
-
-        // 2. Selektuj firmu
-        if (idFirme != -1) {
-            for (String f : comboFirma.getItems()) {
-                if (f.startsWith(idFirme + " -")) {
-                    comboFirma.setValue(f);
-                    break;
-                }
-            }
-        }
     }
 
     private void loadFirme() {
@@ -80,43 +61,72 @@ public class DodajUgovorController {
         } catch (Exception e) { e.printStackTrace(); }
     }
 
+    // NOVO: učitava samo potražnje za odabranu firmu
+    private void loadPotraznjeZaFirmu() {
+        String selectedFirma = comboFirma.getValue();
+        if (selectedFirma == null) {
+            comboPotraznje.getItems().clear();
+            return;
+        }
+
+        int idFirme = Integer.parseInt(selectedFirma.split(" - ")[0]);
+
+        try (Connection conn = DB.getConnection()) {
+            potraznjeList.clear();
+            String sql = "SELECT idPotraznjeRadnika, naslovPotraznje, brojRadnika " +
+                    "FROM potraznjaRadnika " +
+                    "WHERE idFirme = ? AND statusPotraznje = 'aktivna' AND brojRadnika > 0";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, idFirme);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                potraznjeList.add(rs.getInt("idPotraznjeRadnika") + " - " +
+                        rs.getString("naslovPotraznje") + " (" + rs.getInt("brojRadnika") + " preostalo)");
+            }
+
+            comboPotraznje.setItems(potraznjeList);
+
+        } catch (Exception e) { e.printStackTrace(); }
+    }
+
     @FXML
     private void posaljiUgovor() {
         try (Connection conn = DB.getConnection()) {
 
-            if (comboFirma.getValue() == null || comboRadnik.getValue() == null || datePocetak.getValue() == null) {
-                showAlert("Greška", "Popunite sva obavezna polja (Firma, Radnik, Datum početka)!");
+            if (comboFirma.getValue() == null || comboRadnik.getValue() == null ||
+                    datePocetak.getValue() == null || comboPotraznje.getValue() == null) {
+                showAlert("Greška", "Popunite sva obavezna polja (Firma, Radnik, Potražnja, Datum početka)!");
                 return;
             }
 
             int idFirme = Integer.parseInt(comboFirma.getValue().split(" - ")[0]);
             int idRadnika = Integer.parseInt(comboRadnik.getValue().split(" - ")[0]);
+            int idPotraznje = Integer.parseInt(comboPotraznje.getValue().split(" - ")[0]);
             Date datumPocetka = Date.valueOf(datePocetak.getValue());
             Date datumKraja = dateKraj.getValue() != null ? Date.valueOf(dateKraj.getValue()) : null;
 
-            // POPRAVLJENO: Mora biti tačno 'naCekanju' zbog ENUM-a u bazi
             String status = "naCekanju";
             String opis = textOpis.getText();
 
             String sql = """
-                INSERT INTO ugovor (idFirme, idRadnika, datumPocetkaRada, datumKrajaRada, statusUgovora, opis, drzavaRadaId, datumKreiranja) 
-                VALUES (?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)
+                INSERT INTO ugovor (idFirme, idRadnika, idPotraznjeRadnika, datumPocetkaRada, datumKrajaRada, statusUgovora, opis, drzavaRadaId, datumKreiranja) 
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)
             """;
 
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setInt(1, idFirme);
             stmt.setInt(2, idRadnika);
-            stmt.setDate(3, datumPocetka);
-            stmt.setDate(4, datumKraja);
-            stmt.setString(5, status);
-            stmt.setString(6, opis);
-            stmt.setInt(7, 1);
+            stmt.setInt(3, idPotraznje);
+            stmt.setDate(4, datumPocetka);
+            stmt.setDate(5, datumKraja);
+            stmt.setString(6, status);
+            stmt.setString(7, opis);
+            stmt.setInt(8, 1);
 
             int inserted = stmt.executeUpdate();
             if (inserted > 0) {
-                // Ažuriramo status radnika u 'zaposlen' (provjeri da li tvoj ENUM u radnicima podržava ovo)
                 azurirajStatusRadnika(idRadnika, "zaposlen");
-
                 showAlert("Uspjeh", "Ugovor je uspješno kreiran!");
                 Stage stage = (Stage) btnPosalji.getScene().getWindow();
                 stage.close();
@@ -127,10 +137,27 @@ public class DodajUgovorController {
             showAlert("Greška", "Greška pri upisu: " + e.getMessage());
         }
     }
+    public void setPodaci(Radnik radnik, int idFirme) {
+        if (radnik != null) {
+            String radnikString = radnik.getIdRadnika() + " - " + radnik.getIme() + " " + radnik.getPrezime();
+            if (!comboRadnik.getItems().contains(radnikString)) comboRadnik.getItems().add(radnikString);
+            comboRadnik.setValue(radnikString);
+        }
+
+        if (idFirme != -1) {
+            for (String f : comboFirma.getItems()) {
+                if (f.startsWith(idFirme + " -")) {
+                    comboFirma.setValue(f);
+                    loadPotraznjeZaFirmu(); // odmah prikaz potražnji za firmu
+                    break;
+                }
+            }
+        }
+    }
+
 
     private void azurirajStatusRadnika(int idRadnika, String noviStatus) {
         try (Connection conn = DB.getConnection()) {
-            // NAPOMENA: Ako tabela 'radnici' ima ENUM za status, 'noviStatus' mora biti jedna od dozvoljenih vrijednosti
             String sql = "UPDATE radnici SET nazivStatusa = ? WHERE idRadnika = ?";
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, noviStatus);

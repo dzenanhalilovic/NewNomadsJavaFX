@@ -10,6 +10,9 @@ import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+
 public class FirmaUgovoriController {
 
     @FXML private TableView<Ugovor> ugovoriTable;
@@ -40,12 +43,10 @@ public class FirmaUgovoriController {
         colStatus.setCellValueFactory(data -> data.getValue().statusUgovoraProperty());
         colOpis.setCellValueFactory(data -> data.getValue().opisProperty());
 
-        // Početno sakrij dugmad
         azurirajVidljivostDugmadi(null);
 
-        // Dodajemo listener na selekciju u tabeli
-        ugovoriTable.getSelectionModel().selectedItemProperty().addListener((obs, staraSelekcija, novaSelekcija) -> {
-            azurirajVidljivostDugmadi(novaSelekcija);
+        ugovoriTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSel, newSel) -> {
+            azurirajVidljivostDugmadi(newSel);
         });
 
         ugovoriTable.setFixedCellSize(25);
@@ -61,10 +62,8 @@ public class FirmaUgovoriController {
             return;
         }
 
-        String status = ugovor.getStatusUgovora();
-
-        // Provjera uz ignorisanje velikih/malih slova i razmaka
-        boolean naCekanju = status != null && status.trim().equalsIgnoreCase("naCekanju");
+        boolean naCekanju = ugovor.getStatusUgovora() != null &&
+                ugovor.getStatusUgovora().trim().equalsIgnoreCase("naCekanju");
 
         btnPrihvati.setVisible(naCekanju);
         btnPrihvati.setManaged(naCekanju);
@@ -82,8 +81,32 @@ public class FirmaUgovoriController {
     private void prihvatiUgovor() {
         Ugovor selektovan = ugovoriTable.getSelectionModel().getSelectedItem();
         if (selektovan != null) {
-            UgovorDAO.updateStatusUgovora(selektovan.getIdUgovora(), "aktivan");
-            loadUgovori();
+            try (Connection conn = DB.getConnection()) {
+                // 1. Promjena statusa ugovora
+                PreparedStatement stmt = conn.prepareStatement(
+                        "UPDATE ugovor SET statusUgovora = 'aktivan' WHERE idUgovora = ?"
+                );
+                stmt.setInt(1, selektovan.getIdUgovora());
+                stmt.executeUpdate();
+
+                // 2a. Smanji brojRadnika za 1
+                stmt = conn.prepareStatement(
+                        "UPDATE potraznjaRadnika SET brojRadnika = brojRadnika - 1 WHERE idPotraznjeRadnika = ?"
+                );
+                stmt.setInt(1, selektovan.getIdPotraznjeRadnika());
+                stmt.executeUpdate();
+
+                // 2b. Ako je brojRadnika sada 0, postavi status na 'neaktivna'
+                stmt = conn.prepareStatement(
+                        "UPDATE potraznjaRadnika SET statusPotraznje = 'neaktivna' " +
+                                "WHERE idPotraznjeRadnika = ? AND brojRadnika <= 0"
+                );
+                stmt.setInt(1, selektovan.getIdPotraznjeRadnika());
+                stmt.executeUpdate();
+
+                loadUgovori(); // refresujemo tabelu
+
+            } catch (Exception e) { e.printStackTrace(); }
         }
     }
 
@@ -102,8 +125,6 @@ public class FirmaUgovoriController {
             Stage stage = (Stage) ugovoriTable.getScene().getWindow();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/newnomads/firma.fxml"));
             stage.setScene(new Scene(loader.load()));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        } catch (Exception e) { e.printStackTrace(); }
     }
 }
