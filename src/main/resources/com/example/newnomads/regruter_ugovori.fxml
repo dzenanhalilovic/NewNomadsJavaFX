@@ -33,6 +33,8 @@
                     <TableColumn fx:id="datumKrajaCol" text="Datum kraja" prefWidth="120"/>
                     <TableColumn fx:id="statusCol" text="Status" prefWidth="100"/>
                     <TableColumn fx:id="opisCol" text="Opis / Napomena" prefWidth="220"/>
+                    <TableColumn fx:id="exportCol" text="Export" prefWidth="120"/>
+
                 </columns>
             </TableView>
 

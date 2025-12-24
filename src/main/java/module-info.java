@@ -11,6 +11,8 @@ module com.example.newnomads {
     requires io.github.cdimascio.dotenv.java;
     requires java.desktop;
 
+    requires org.apache.poi.ooxml;
+    requires org.apache.pdfbox;
 
     opens com.example.newnomads to javafx.fxml;
     exports com.example.newnomads;
