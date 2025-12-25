@@ -31,6 +31,11 @@
                 onAction="#resetFilters"
                 styleClass="filter-button"/>
 
+        <Button text="Export PDF"
+                onAction="#exportRadniciPdf"
+                styleClass="filter-button"/>
+
+
     </HBox>
 
     <!-- Tabela -->

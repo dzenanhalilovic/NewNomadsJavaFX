@@ -11,7 +11,10 @@ import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.util.Callback;
+import javafx.stage.FileChooser;
 
+
+import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -98,6 +101,45 @@ public class RegruterRadniciController {
             }
         });
     }
+    @FXML
+    private void exportRadniciPdf() {
+        try {
+            if (radnici.isEmpty()) {
+                Alert a = new Alert(Alert.AlertType.WARNING);
+                a.setHeaderText(null);
+                a.setContentText("Nema radnika za export.");
+                a.show();
+                return;
+            }
+
+            FileChooser fc = new FileChooser();
+            fc.setTitle("Snimi listu radnika");
+            fc.getExtensionFilters().add(
+                    new FileChooser.ExtensionFilter("PDF fajl", "*.pdf")
+            );
+            fc.setInitialFileName("radnici_lista.pdf");
+
+            File file = fc.showSaveDialog(radniciTable.getScene().getWindow());
+            if (file == null) return;
+
+            // 👉 OVDJE SE POZIVA TVOJ PDF EXPORTER
+            PdfRadniciExporter.export(radnici, file);
+
+            Alert ok = new Alert(Alert.AlertType.INFORMATION);
+            ok.setHeaderText(null);
+            ok.setContentText("PDF uspješno sačuvan.");
+            ok.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            Alert err = new Alert(Alert.AlertType.ERROR);
+            err.setHeaderText("Greška pri exportu");
+            err.setContentText(e.getMessage());
+            err.show();
+        }
+    }
+
+
 
 
     private void otvoriProzorZaUgovor(Radnik r) {
@@ -146,13 +188,24 @@ public class RegruterRadniciController {
         try (Connection conn = DB.getConnection()) {
             // Dodali smo r.nazivStatusa u SELECT dio
             String sql = """
-            SELECT r.idRadnika, r.ime, r.prezime, r.nazivStatusa, 
-                   d.nazivDrzave AS drzava, g.nazivGraneRada AS grana
+            
+                    SELECT r.idRadnika,
+                   r.ime,
+                   r.prezime,
+                   r.brojPasosa,
+                   r.spol,
+                   r.datumRodjenja,
+                   r.doKadTrajePasos,
+                   r.doKadTrajeViza,
+                   r.nazivStatusa,
+                   d.nazivDrzave AS drzava,
+                   g.nazivGraneRada AS grana
             FROM radnici r
             LEFT JOIN drzave d ON r.drzavaId = d.drzavaId
             LEFT JOIN granaRada g ON r.idGraneRada = g.idGraneRada
             WHERE (? IS NULL OR d.nazivDrzave = ?)
               AND (? IS NULL OR g.nazivGraneRada = ?)
+            
             """;
 
             PreparedStatement stmt = conn.prepareStatement(sql);
@@ -175,12 +228,17 @@ public class RegruterRadniciController {
 
                 Radnik r = new Radnik(
                         rs.getInt("idRadnika"),
-                        "", // brojPasosa
+                        rs.getString("brojPasosa"),
                         rs.getString("ime"),
                         rs.getString("prezime"),
-                        0, 0, "", null, null, null,
-                        spojeniPodaci // Ovo ide u status polje objekta Radnik
+                        0, 0,
+                        rs.getString("spol"),
+                        rs.getDate("datumRodjenja"),
+                        rs.getDate("doKadTrajePasos"),
+                        rs.getDate("doKadTrajeViza"),
+                        spojeniPodaci
                 );
+
                 radnici.add(r);
             }
             radniciTable.setItems(radnici);
