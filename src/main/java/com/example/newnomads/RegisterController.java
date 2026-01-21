@@ -62,7 +62,11 @@ public class RegisterController {
         Stage stage = (Stage) imeField.getScene().getWindow();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/newnomads/login.fxml"));
         Scene scene = new Scene(loader.load());
+
         stage.setScene(scene);
+
+        // Forsiraj maksimizaciju
+        stage.setMaximized(false); // Resetuj kratko (opcionalno, pomaže kod nekih OS-ova)
         stage.setMaximized(true);
     }
 

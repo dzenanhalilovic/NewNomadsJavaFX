@@ -96,3 +96,37 @@
 .text-area:focused .content {
     -fx-background-color: #0f172a;
 }
+
+/* TextArea - Glavni kontejner */
+.text-area {
+    -fx-background-color: transparent; /* Ključno: uklanja pozadinu koja viri na uglovima */
+    -fx-padding: 0;
+    -fx-background-insets: 0;
+}
+
+/* Unutrašnjost TextArea (ovde zapravo stavljamo border i radius) */
+.text-area .content {
+    -fx-background-color: #1e293b;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-border-color: #334155;
+    -fx-border-width: 1;
+    -fx-text-fill: white;
+    -fx-prompt-text-fill: #94a3b8;
+}
+
+/* Fokus na TextArea */
+.text-area:focused .content {
+    -fx-border-color: #38bdf8;
+    -fx-background-color: #0f172a;
+}
+
+/* Uklanjanje plavog sjaja oko celog TextArea kada je u fokusu */
+.text-area:focused {
+    -fx-background-insets: 0;
+}
+
+/* Sakrivanje scroll barova ako želiš još čistiji izgled (opcionalno) */
+.text-area .scroll-pane {
+    -fx-background-color: transparent;
+}

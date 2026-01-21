@@ -27,7 +27,7 @@
 
             <TableColumn fx:id="colOpis" text="Napomena" minWidth="250"/>
 
-            <TableColumn fx:id="colAkcija" text="Akcije" minWidth="220" maxWidth="300"/>
+            <TableColumn fx:id="colAkcija"  styleClass="action-column" text="Akcije" minWidth="220" maxWidth="300"/>
         </columns>
 
         <columnResizePolicy>

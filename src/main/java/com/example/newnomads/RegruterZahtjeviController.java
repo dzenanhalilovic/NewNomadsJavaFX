@@ -6,6 +6,8 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -59,10 +61,14 @@ public class RegruterZahtjeviController {
         colAkcija.setCellFactory(param -> new TableCell<>() {
             private final Button btnOk = new Button("✔ Odobri");
             private final Button btnNo = new Button("✘ Odbij");
-            private final HBox box = new HBox(10, btnOk, btnNo);
+            private final HBox box = new HBox(15, btnOk, btnNo); // Povećan razmak između dugmadi na 15
             {
-                btnOk.setStyle("-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-cursor: hand;");
-                btnNo.setStyle("-fx-background-color: #f44336; -fx-text-fill: white; -fx-cursor: hand;");
+                // PADDING I PORAVNANJE ZA HBOX
+                box.setAlignment(Pos.CENTER);
+                box.setPadding(new Insets(5, 10, 5, 10)); // Gornji, desni, donji, lijevi padding
+
+                btnOk.setStyle("-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-cursor: hand; -fx-padding: 8 15; -fx-background-radius: 5;");
+                btnNo.setStyle("-fx-background-color: #f44336; -fx-text-fill: white; -fx-cursor: hand; -fx-padding: 8 15; -fx-background-radius: 5;");
 
                 btnOk.setOnAction(e -> obradi(getTableView().getItems().get(getIndex()), "aktivan", "zaposlen"));
                 btnNo.setOnAction(e -> obradi(getTableView().getItems().get(getIndex()), "odbijen", "slobodan"));
@@ -70,7 +76,13 @@ public class RegruterZahtjeviController {
             @Override
             protected void updateItem(Void item, boolean empty) {
                 super.updateItem(item, empty);
-                setGraphic(empty ? null : box);
+                if (empty) {
+                    setGraphic(null);
+                } else {
+                    setGraphic(box);
+                    // Centriranje same ćelije
+                    setAlignment(Pos.CENTER);
+                }
             }
         });
     }
